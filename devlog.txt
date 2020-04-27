@@ -1,10 +1,22 @@
-Team Raduckal: Yaru Luo (PM), Jenny Huang, Jackie Lin, Emily Zhang 
+Team Raduckal: Yaru Luo (PM), Jenny Huang, Jackie Lin, Emily Zhang
 SoftDev pd1
 P04: Let the Data Speak
 2020-04-24
 
-luoY -- 2020-04-24 11:51
+yaruL -- 2020-04-24 11:51
 Created repository and linked submodules
 
-luoY -- 2020-04-26 22:46
+yaruL -- 2020-04-26 22:46
 Added design doc!
+
+peihuaH -- 2020-04-27 16:04
+- added the csv file
+- wrote parser.py
+  - get_data_by_state() returns all the data needed for the
+      population (column: state, pop),
+      ethnicity (column: state, hispanic, white, black, native, asian, pacific),
+      gender ratio (column: state, men, women),
+      and voting citizen (column: state, voting, nonvoting) by state charts
+  - get_data_by_county(state) returns all the data needed for the
+      population (column: county, pop)
+      and median income (column: county, income) by county charts for the given state
