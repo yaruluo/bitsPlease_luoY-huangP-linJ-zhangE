@@ -20,3 +20,6 @@ peihuaH -- 2020-04-27 16:04
   - get_data_by_county(state) returns all the data needed for the
       population (column: county, pop)
       and median income (column: county, income) by county charts for the given state
+
+yaruL -- 2020-04-24 17:13
+Fixed design doc link
