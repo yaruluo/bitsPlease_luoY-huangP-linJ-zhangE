@@ -23,3 +23,7 @@ peihuaH -- 2020-04-27 16:04
 
 yaruL -- 2020-04-24 17:13
 Fixed design doc link
+
+peihuaH -- 2020-04-28 18:05
+- Took DC and Puerto Rico off the list of states
+- Moved utl/ and data/ into app/

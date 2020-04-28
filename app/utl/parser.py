@@ -10,7 +10,7 @@ def get_data_by_state():
         pop = men = women = hispanic = white = black = native = asian = pacific = voting = 0
         reader = csv.DictReader(csv_file)
         for row in reader:
-            if (state == "" or state == row['State']):
+            if (row['State'] != "DC" and row['State'] != "Puerto Rico" and (state == "" or state == row['State'])):
                 temp_pop = int(row['TotalPop'])
                 state = row['State']
                 pop += temp_pop
@@ -23,7 +23,7 @@ def get_data_by_state():
                 asian += float(row['Asian']) * temp_pop / 100
                 pacific += float(row['Pacific']) * temp_pop / 100
                 voting += int(row['VotingAgeCitizen'])
-            else:
+            elif state != "":
                 data.append({'state': state, 'pop': pop, 'men': men, 'women': women,
                              'hispanic': int(hispanic), 'white': int(white), 'black': int(black),
                              'native': int(native), 'asian': int(asian), 'pacific': int(pacific),
@@ -44,5 +44,5 @@ def get_data_by_county(state):
                              'income': row['Income']})
     return data
 
-# print(get_data_by_state())
+print(get_data_by_state())
 # print(get_data_by_county('New York'));
