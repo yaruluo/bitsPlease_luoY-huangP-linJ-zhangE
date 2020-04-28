@@ -44,5 +44,5 @@ def get_data_by_county(state):
                              'income': row['Income']})
     return data
 
-print(get_data_by_state())
+# print(get_data_by_state())
 # print(get_data_by_county('New York'));
