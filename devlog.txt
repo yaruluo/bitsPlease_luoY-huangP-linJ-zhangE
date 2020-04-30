@@ -27,3 +27,16 @@ Fixed design doc link
 peihuaH -- 2020-04-28 18:05
 - Took DC and Puerto Rico off the list of states
 - Moved utl/ and data/ into app/
+
+jackieL -- 2020-04-29 21:47
+- design doc reviewed by Team JEeBerS and Team Mykolyangelo
+- JEeBerS complimented organization and layout of doc, as well as visualizations
+  - suggested color-coding site map
+- Mykolyangelo complimented visualizations and site map
+  - suggested we moved D3 from 'backend' to 'machinery' component map
+  - suggested we add dates to project timeline
+  - asked for clarification on mechanism of changing display options for graphs
+- in response, component map and project timeline were updated
+  - site map will be updated in near future as we figure out structure of site
+- thanks to new deadline, we were able to devote more time to finishing the expected product
+  - also squeezed in a bit a time to work on extra features, subject to change
