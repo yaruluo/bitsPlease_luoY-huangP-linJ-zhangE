@@ -10,3 +10,15 @@ app.secret_key = os.urandom(32)
 def root():
     '''def root(): TBD'''
     return "HELLO WORLD"
+
+@app.route("/home")
+def home():
+    return "HOME"
+
+@app.route("/info")
+def info():
+    return "INFO"
+
+@app.route('/<state>')
+def state(state):
+    return "STATE"
