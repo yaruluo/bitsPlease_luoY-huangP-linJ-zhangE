@@ -1,5 +1,9 @@
+#Team Raduckal
+#SoftDev pd1
+#P04 -- Let the Data Speak
+#2020-05-11
+
 from flask import Flask , render_template,request, redirect, url_for, session, flash
-from functools import wraps
 import os, random
 from utl import parser
 
@@ -22,3 +26,7 @@ def info():
 @app.route('/<state>')
 def state(state):
     return "STATE"
+
+if __name__ == "__main__":
+    app.debug = True
+    app.run()

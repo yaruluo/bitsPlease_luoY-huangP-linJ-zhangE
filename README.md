@@ -7,11 +7,11 @@ SoftDev pd1
 
 P04: Let the Data Speak
 
-2020-04-24
+2020-05-11
 
 
 # Roster
-Yaru (PM) 
+Yaru (PM)
 - oversees & plans incremental project development milestones
 - updates design doc and devlog
 - instructions page
@@ -32,7 +32,7 @@ Emily
 - Transitions
 
 
-# Description/summary
+# Description/Summary
 
 Our project makes use of census data compiled from 2017, sourced from Kaggle.com.
 The data contains a wealth of information, from gender ratios to median income
@@ -40,3 +40,27 @@ statistics. This information will be represented in a variety of visualizations,
 including bar charts, pie charts, and choropleth maps. To encourage user
 interactivity, users will be able to navigate between different visualizations as
 well as choose between display options.
+
+# Launch Instructions
+
+First, clone or download the project and navigate into the repository where it is stored.
+```
+$ git clone git@github.com:yaruluo/raduckal__yluo00-phuang00-jlin00-ezhang00.git raduckal
+$ cd raduckal/
+```
+
+Then, create a virtual environment like so:
+```
+$ python3 -m venv ~/test
+$ . ~/test/bin/activate
+```
+
+Install the required modules with the following command:
+```
+(test)$ pip install -r requirements.txt
+```
+
+Now, you can run the project!
+```
+(test)$ python3 __init.py__
+```
