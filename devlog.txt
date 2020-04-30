@@ -40,3 +40,7 @@ jackieL -- 2020-04-29 21:47
   - site map will be updated in near future as we figure out structure of site
 - thanks to new deadline, we were able to devote more time to finishing the expected product
   - also squeezed in a bit a time to work on extra features, subject to change
+
+jackieL -- 2020-04-29 22:10
+- edited __init__.py to contain basic routes and imports
+- added in more folders and added in code for base.html and home.html files
