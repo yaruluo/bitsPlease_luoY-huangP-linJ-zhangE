@@ -5,7 +5,7 @@ def get_data_by_state():
     '''returns all the data needed for the population, ethnicity, gender ratio,
        and voting citizen by state charts'''
     data = []
-    with open('../data/2017data.csv') as csv_file:
+    with open('data/2017data.csv') as csv_file:
         state = ""
         pop = men = women = hispanic = white = black = native = asian = pacific = voting = 0
         reader = csv.DictReader(csv_file)
@@ -36,7 +36,7 @@ def get_data_by_county(state):
     '''returns all the data needed for the population and median income by county
        charts for the given state'''
     data = []
-    with open('../data/2017data.csv') as csv_file:
+    with open('data/2017data.csv') as csv_file:
         reader = csv.DictReader(csv_file)
         for row in reader:
             if state == row['State']:

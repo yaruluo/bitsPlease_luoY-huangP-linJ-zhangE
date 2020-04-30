@@ -25,7 +25,8 @@ def info():
 
 @app.route('/<state>')
 def state(state):
-    return "STATE"
+    data = parser.get_data_by_county(state)
+    return render_template('state.html', data = data)
 
 if __name__ == "__main__":
     app.debug = True

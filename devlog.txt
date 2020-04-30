@@ -44,3 +44,9 @@ jackieL -- 2020-04-29 21:47
 jackieL -- 2020-04-29 22:10
 - edited __init__.py to contain basic routes and imports
 - added in more folders and added in code for base.html and home.html files
+
+peihuaH -- 2020-04-30 19:50
+- adjusted file path is parser.py
+- made basic template for states (state.html)
+- linked state.html to flask route
+- created the population by county chart

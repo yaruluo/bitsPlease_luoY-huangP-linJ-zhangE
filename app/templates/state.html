@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Home
+{% endblock %}
+
+{% block body %}
+<button id="pop">Population</button>
+<div id="popchart">
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+  var data = {{ data|tojson }};
+</script>
+<script src="{{url_for('static', filename='js/state.js')}}"></script>
+{% endblock %}
