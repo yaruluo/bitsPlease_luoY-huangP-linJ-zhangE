@@ -41,26 +41,56 @@ including bar charts, pie charts, and choropleth maps. To encourage user
 interactivity, users will be able to navigate between different visualizations as
 well as choose between display options.
 
-# Launch Instructions
+## Instructions
 
-First, clone or download the project and navigate into the repository where it is stored.
-```
-$ git clone git@github.com:yaruluo/raduckal__yluo00-phuang00-jlin00-ezhang00.git raduckal
-$ cd raduckal/
-```
+### Assuming python3 and pip are already installed
 
-Then, create a virtual environment like so:
-```
-$ python3 -m venv ~/test
-$ . ~/test/bin/activate
-```
+### Virtual Environment
 
-Install the required modules with the following command:
-```
-(test)$ pip install -r requirements.txt
+- To prevent conflicts with globally installed packages, it is recommended to run everything below in a virtual environment.
+
+Set up a virtual environment by running the following in your terminal:
+
+```shell
+python3 -m venv hero
+# replace hero with anything you want
+# If the above does not work, run with python3 (this may be the case if a version of python2 is also installed)
 ```
 
-Now, you can run the project!
+To enter your virtual environment, run the following:
+
+```shell
+. hero/bin/activate
 ```
-(test)$ python3 __init.py__
+
+To exit your virtual environment, run the following:
+
+```shell
+deactivate
 ```
+
+### Dependencies
+
+Run the following line in your virtual environment
+
+```shell
+pip install -r requirements.txt
+```
+
+### Cloning
+
+Run the following line in your terminal
+
+```shell
+git clone https://github.com/yaruluo/raduckal__yluo00-phuang00-jlin00-ezhang00
+```
+
+### Running
+
+Run the following line in your virtual environment
+
+```shell
+python3 app/__init.py__
+```
+
+Open a browser and head to <http://127.0.0.1:5000/>
