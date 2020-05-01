@@ -50,3 +50,8 @@ peihuaH -- 2020-04-30 19:50
 - made basic template for states (state.html)
 - linked state.html to flask route
 - created the population by county chart
+
+jackieL -- 2020-05-01 03:17
+- added basic template for home (home.html)
+- linked home.html to flask route
+- mapped state population data in home.js
