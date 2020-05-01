@@ -17,7 +17,8 @@ def root():
 
 @app.route("/home")
 def home():
-    return "HOME"
+    data = parser.get_data_by_state();
+    return render_template('home.html', data=data)
 
 @app.route("/info")
 def info():
