@@ -65,3 +65,6 @@ peihuaH -- 2020-05-02 00:25
 - did the ethnicity by state chart (after mulling over a lot of code ;-;)
 - changed parser.py to split up getting ethnicity data through get_ethnicity_by_state() instead
   of get_data_by_state() to make it easier for the ethnicity chart (removes unnecessary columns)
+
+peihuaH -- 2020-05-02 00:48
+- changed the colors of the radial stacked bar graph for better visuals
