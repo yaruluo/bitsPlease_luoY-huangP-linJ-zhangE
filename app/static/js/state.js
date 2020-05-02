@@ -39,7 +39,6 @@ var render_pop = function(e){
   svg.append("g")
       .attr("fill", "black")
       .attr("text-anchor", "start")
-      .attr("font-family", "sans-serif")
       .attr("font-size", 12)
     .selectAll("text")
     .data(data)
