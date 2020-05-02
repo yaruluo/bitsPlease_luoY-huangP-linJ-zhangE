@@ -67,12 +67,12 @@ var render_eth = function(e){
   var arc = d3.arc()
       .innerRadius(d =>y(d[0]))
       .outerRadius(d => y(d[1]))
-      .startAngle(d => x(d.data.state))
-      .endAngle(d => x(d.data.state) + x.bandwidth())
+      .startAngle(d => x(d.data.abbrev))
+      .endAngle(d => x(d.data.abbrev) + x.bandwidth())
       .padAngle(0.01)
       .padRadius(innerRadius);
   var x = d3.scaleBand()
-      .domain(dataset.map(d => d.state))
+      .domain(dataset.map(d => d.abbrev))
       .range([0, 2 * Math.PI])
       .align(0);
   var y = d3.scaleLinear()
@@ -83,21 +83,22 @@ var render_eth = function(e){
       .range(["#ffb3ba", "#ffdfba", "#ffffba", "#baffc9", "#bae1ff", "#c4bfff"].reverse());
   var xAxis = g => g
       .attr("text-anchor", "middle")
+      .attr("font-size", 12)
       .call(g => g.selectAll("g")
         .data(dataset)
         .enter().append("g")
           .attr("transform", d => `
-            rotate(${((x(d.state) + x.bandwidth() / 2) * 180 / Math.PI - 90)})
+            rotate(${((x(d.abbrev) + x.bandwidth() / 2) * 180 / Math.PI - 90)})
             translate(${innerRadius},0)
           `)
           .call(g => g.append("line")
               .attr("x2", -5)
               .attr("stroke", "#000"))
           .call(g => g.append("text")
-              .attr("transform", d => (x(d.state) + x.bandwidth() / 2 + Math.PI / 2) % (2 * Math.PI) < Math.PI
+              .attr("transform", d => (x(d.abbrev) + x.bandwidth() / 2 + Math.PI / 2) % (2 * Math.PI) < Math.PI
                   ? "rotate(90)translate(0,16)"
                   : "rotate(-90)translate(0,-9)")
-              .text(d => d.state)))
+              .text(d => d.abbrev)))
   var yAxis = g => g
       .attr("text-anchor", "middle")
       .call(g => g.append("text")

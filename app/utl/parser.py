@@ -1,5 +1,17 @@
 import csv
 
+ABBREV = {'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR', 'California': 'CA',
+          'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE', 'Florida': 'FL', 'Georgia': 'GA',
+          'Hawaii': 'HI', 'Idaho': 'ID', 'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA',
+          'Kansas': 'KS', 'Kentucky': 'KY', 'Louisiana': 'LA', 'Maine': 'ME', 'Maryland': 'MD',
+          'Massachusetts': 'MA', 'Michigan': 'MI', 'Minnesota': 'MN', 'Mississippi': 'MS',
+          'Missouri': 'MO', 'Montana': 'MT', 'Nebraska': 'NE', 'Nevada': 'NV',
+          'New Hampshire': 'NH', 'New Jersey': 'NJ', 'New Mexico': 'NM', 'New York': 'NY',
+          'North Carolina': 'NC', 'North Dakota': 'ND', 'Ohio': 'OH', 'Oklahoma': 'OK',
+          'Oregon': 'OR', 'Pennsylvania': 'PA', 'Rhode Island': 'RI', 'South Carolina': 'SC',
+          'South Dakota': 'SD', 'Tennessee': 'TN', 'Texas': 'TX', 'Utah': 'UT', 'Vermont': 'VT',
+          'Virginia': 'VA', 'Washington': 'WA', 'West Virginia': 'WV', 'Wisconsin': 'WI',
+          'Wyoming': 'WY'}
 
 def get_data_by_state():
     '''returns all the data needed for the population, ethnicity, gender ratio,
@@ -20,7 +32,7 @@ def get_data_by_state():
                 voting += int(row['VotingAgeCitizen'])
             elif state != "":
                 data.append({'state': state, 'pop': pop, 'men': men, 'women': women,
-                             'voting': voting, 'nonvoting': pop - voting})
+                             'voting': voting, 'nonvoting': pop - voting, 'abbrev': ABBREV[state]})
                 state = ""
                 pop = men = women = voting = 0
     return data
@@ -48,7 +60,7 @@ def get_ethnicity_by_state():
             elif state != "":
                 data.append({'state': state, 'hispanic': int(hispanic), 'white': int(white),
                              'black': int(black), 'native': int(native), 'asian': int(asian),
-                             'pacific': int(pacific), 'total': total})
+                             'pacific': int(pacific), 'total': total, 'abbrev': ABBREV[state]})
                 state = ""
                 total = hispanic = white = black = native = asian = pacific = 0
     return data

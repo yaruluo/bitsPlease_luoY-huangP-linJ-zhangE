@@ -68,3 +68,7 @@ peihuaH -- 2020-05-02 00:25
 
 peihuaH -- 2020-05-02 00:48
 - changed the colors of the radial stacked bar graph for better visuals
+
+peihuaH -- 2020-05-02 01:06
+- fixed the labeling of the ethnicity chart such that the abbreviations of the states are displayed
+- added an abbrev column all the data gathered in parser.py to make life easier for everyone
