@@ -3,9 +3,9 @@ var pop = document.getElementById('pop');
 var render_pop = function(e){
   var space = document.getElementById('popchart');
   space.innerHTML = "";
-  var margin = {top: 30, right: 0, bottom: 10, left: 175},
+  var margin = {top: 30, right: 50, bottom: 10, left: 175},
       barHeight = 25,
-      width = 1000;
+      width = 800 + margin.right + margin.left;
       height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom;
   var x = d3.scaleLinear()
       .domain([0, d3.max(data, function(d) { return +d.pop; })])
@@ -37,14 +37,14 @@ var render_pop = function(e){
       .attr("height", y.bandwidth());
 
   svg.append("g")
-      .attr("fill", "white")
-      .attr("text-anchor", "end")
+      .attr("fill", "black")
+      .attr("text-anchor", "start")
       .attr("font-family", "sans-serif")
       .attr("font-size", 12)
     .selectAll("text")
     .data(data)
     .enter().append("text")
-      .attr("x", d => x(d.pop) - 4)
+      .attr("x", d => x(d.pop) + 4)
       .attr("y", (d, i) => y(i) + y.bandwidth() / 2)
       .attr("dy", "0.35em")
       .text(d => format(d.pop));

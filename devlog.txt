@@ -55,3 +55,8 @@ jackieL -- 2020-05-01 03:17
 - added basic template for home (home.html)
 - linked home.html to flask route
 - mapped state population data in home.js
+
+peihuaH -- 2020-05-01 20:39
+- fixed population by county chart such that:
+  - the bars no longer go past the edge of the page
+  - the labels are displayed to the right of the bars so none of them are blocked anymore
