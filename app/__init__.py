@@ -17,8 +17,10 @@ def root():
 
 @app.route("/home")
 def home():
-    data = parser.get_data_by_state();
-    return render_template('home.html', data=data)
+    data = parser.get_data_by_state()
+    dataset = parser.get_ethnicity_by_state()
+    # print(dataset);
+    return render_template('home.html', data=data, dataset=dataset)
 
 @app.route("/info")
 def info():

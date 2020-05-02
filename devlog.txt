@@ -60,3 +60,8 @@ peihuaH -- 2020-05-01 20:39
 - fixed population by county chart such that:
   - the bars no longer go past the edge of the page
   - the labels are displayed to the right of the bars so none of them are blocked anymore
+
+peihuaH -- 2020-05-02 00:25
+- did the ethnicity by state chart (after mulling over a lot of code ;-;)
+- changed parser.py to split up getting ethnicity data through get_ethnicity_by_state() instead
+  of get_data_by_state() to make it easier for the ethnicity chart (removes unnecessary columns)

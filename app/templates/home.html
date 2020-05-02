@@ -8,11 +8,15 @@
 <button id="pop">Population</button>
 <div id="popchart">
 </div>
+<button id="eth">Ethnicity</button>
+<div id="ethchart">
+</div>
 {% endblock %}
 
 {% block script %}
 <script type="text/javascript">
   var data = {{ data|tojson }};
+	var dataset = {{ dataset|tojson }};
 </script>
 <script src="{{url_for('static', filename='js/home.js')}}"></script>
 <script src="https://unpkg.com/topojson-client@3"></script>
