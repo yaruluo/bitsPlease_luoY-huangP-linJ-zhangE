@@ -17,6 +17,7 @@
 <script type="text/javascript">
   var data = {{ data|tojson }};
 	var dataset = {{ dataset|tojson }};
+	var gender_data = {{ gender_data|tojson }};
 </script>
 <script src="{{url_for('static', filename='js/home.js')}}"></script>
 <script src="https://unpkg.com/topojson-client@3"></script>

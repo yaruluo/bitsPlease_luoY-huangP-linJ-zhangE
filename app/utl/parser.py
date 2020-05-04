@@ -38,8 +38,7 @@ def get_data_by_state():
     return data
 
 def get_ethnicity_by_state():
-    '''returns all the data needed for the population, ethnicity, gender ratio,
-       and voting citizen by state charts'''
+    '''returns all the data needed for the ethnicity by state charts'''
     data = []
     with open('data/2017data.csv') as csv_file:
         state = ""
@@ -63,6 +62,28 @@ def get_ethnicity_by_state():
                              'pacific': int(pacific), 'total': total, 'abbrev': ABBREV[state]})
                 state = ""
                 total = hispanic = white = black = native = asian = pacific = 0
+    return data
+
+def get_gender_by_state():
+    '''returns all the data needed for the gender ratio by state charts'''
+    data = []
+    with open('data/2017data.csv') as csv_file:
+        state = ""
+        male = female = total = 0
+        reader = csv.DictReader(csv_file)
+        for row in reader:
+            if (row['State'] != "DC" and row['State'] != "Puerto Rico" and
+                    (state == "" or state == row['State'])):
+                temp_pop = int(row['TotalPop'])
+                state = row['State']
+                total += temp_pop
+                male += float(row['Men']) * temp_pop / 100
+                female += float(row['Women']) * temp_pop / 100
+            elif state != "":
+                data.append({'state': state, 'male': int(male), 'female': int(female),
+                             'total': total, 'abbrev': ABBREV[state]})
+                state = ""
+                total = female = male = 0
     return data
 
 
