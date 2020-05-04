@@ -5,14 +5,18 @@
 {% endblock %}
 
 {% block body %}
+<span>
+	<select id="order">
+		<option value="0" selected="selected">Alphabetical</option>
+		<option value="1">Ascending</option>
+		<option value="2">Decending</option>
+	</select>
+	<button id="change">Update Graph</button>
+</span>
+<br>
 <button id="pop">Population</button>
 <div id="popchart">
 </div>
-<select id="order">
-	<option value="0" selected="selected">Alphabetical</option>
-	<option value="1">Ascending</option>
-	<option value="2">Decending</option>
-</select>
 {% endblock %}
 
 {% block script %}

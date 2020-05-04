@@ -1,8 +1,9 @@
 var pop = document.getElementById('pop');
 var dropdown = document.getElementById('order');
+var change = document.getElementById('change');
+var space = document.getElementById('popchart');
 
 var render_pop = function(e){
-  var space = document.getElementById('popchart');
   space.innerHTML = "";
   var order = dropdown.options[dropdown.selectedIndex].value;
   if (order == 0) {
@@ -68,3 +69,8 @@ var render_pop = function(e){
 };
 
 pop.addEventListener('click', render_pop);
+change.addEventListener('click', function(){
+  if (space.innerHTML != ""){
+    render_pop();
+  };
+});
