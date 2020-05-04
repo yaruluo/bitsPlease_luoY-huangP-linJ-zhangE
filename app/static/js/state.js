@@ -1,8 +1,19 @@
 var pop = document.getElementById('pop');
+var dropdown = document.getElementById('order');
 
 var render_pop = function(e){
   var space = document.getElementById('popchart');
   space.innerHTML = "";
+  var order = dropdown.options[dropdown.selectedIndex].value;
+  if (order == 0) {
+    data.sort(function (a,b) {return d3.ascending(a.county, b.county);});
+  }
+  else if (order == 1){
+    data.sort(function(a,b) { return +a.pop - +b.pop })
+  }
+  else{
+    data.sort(function(a,b) { return -a.pop - -b.pop })
+  };
   var margin = {top: 30, right: 50, bottom: 10, left: 175},
       barHeight = 25,
       width = 800 + margin.right + margin.left;

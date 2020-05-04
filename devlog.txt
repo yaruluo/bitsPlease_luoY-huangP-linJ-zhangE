@@ -80,4 +80,7 @@ jackieL -- 2020-05-04 03:18
 jackieL -- 2020-05-04 03:58
 - made every state on the map clickable, linking to the state routes
 - labeled each state with its abbreviation
-- added skeleton for gender ratio chart display 
+- added skeleton for gender ratio chart display
+
+peihuaH -- 2020-05-04 08:38
+- Added a dropdown list to states to change the view settings 
