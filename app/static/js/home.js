@@ -4,10 +4,12 @@
 //mapping population data by state
 let state_data = new Map(); //new Map object
 let state_arr = []; //for finding max and min values
+let state_abbrev = {};
 let i; //indexing
 for (i = 0; i < data.length; i++){
   state_data.set(data[i]['state'], data[i]['pop']);
   state_arr.push(parseInt(data[i]['pop']));
+  state_abbrev[data[i]['state']] = data[i]['abbrev'];
 }
 state_data = Object.assign(state_data, {title: "Population"});
 let max = state_arr.reduce(function(a, b) { //get max population
@@ -48,11 +50,22 @@ document.getElementById('pop').addEventListener('click', async () => {
     svg.append("g")
       .selectAll("path")
       .data(pathData)
-      .join("path")
-        .attr("fill", d => color(state_data.get(d.properties.name)))
-        .attr("d", path)
-      .append("title")
-        .text(d => `${d.properties.name}${format(state_data.get(d.properties.name))}`);
+      .enter().append("a")
+      .attr("xlink:href", d => "/"+ d.properties.name)
+        .append("path")
+          .attr("fill", d => color(state_data.get(d.properties.name)))
+          .attr("d", path);
+
+    //label all the states
+    svg.selectAll("text")
+      .data(pathData)
+      .enter().append("svg:text")
+        .text(d => state_abbrev[d.properties.name])
+        .attr("x", d => path.centroid(d)[0])
+        .attr("y", d=> path.centroid(d)[1])
+        .attr("text-anchor","middle")
+        .attr('font-size','8px')
+        .attr('font-weight', 'bold');
 
     //create state borders
     svg.append("path")
@@ -72,6 +85,10 @@ document.getElementById('pop').addEventListener('click', async () => {
 const getMapData = async () => {
   us = await d3.json('static/json/states-albers-10m.json');
   return topojson.feature(us, us.objects.states).features;
+};
+
+const addLabels = () => {
+
 };
 
 //-----------------------------------------------------------
@@ -191,3 +208,10 @@ eth.addEventListener('click', render_eth);
 
 //-----------------------------------------------------------
 //gender data
+var gen = document.getElementById("gen");
+
+var render_gen = function(e){
+
+};
+
+gen.addEventListener('click', render_gen);

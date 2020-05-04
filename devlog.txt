@@ -72,3 +72,12 @@ peihuaH -- 2020-05-02 00:48
 peihuaH -- 2020-05-02 01:06
 - fixed the labeling of the ethnicity chart such that the abbreviations of the states are displayed
 - added an abbrev column all the data gathered in parser.py to make life easier for everyone
+
+jackieL -- 2020-05-04 03:18
+- fixed color scale of map and got population of states to render on choropleth map
+- wrote function in parser.py to return gender ratio data for each state
+
+jackieL -- 2020-05-04 03:58
+- made every state on the map clickable, linking to the state routes
+- labeled each state with its abbreviation
+- added skeleton for gender ratio chart display 
