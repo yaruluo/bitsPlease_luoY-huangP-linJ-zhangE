@@ -11,17 +11,12 @@ app = Flask(__name__)
 app.secret_key = os.urandom(32)
 
 @app.route("/")
-def root():
-    '''def root(): TBD'''
-    return "HELLO WORLD"
-
-@app.route("/home")
 def home():
     data = parser.get_data_by_state()
     eth_data = parser.get_ethnicity_by_state()
     gender_data = parser.get_gender_by_state()
     print(gender_data);
-    return render_template('home.html', data=data, eth_data=eth_data, gender_data=gender_data)
+    return render_template('home.html', data=data, eth_data=eth_data, gender_data=gender_data, home="active")
 
 @app.route("/info")
 def info():
