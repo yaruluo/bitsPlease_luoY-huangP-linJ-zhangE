@@ -86,4 +86,7 @@ peihuaH -- 2020-05-04 08:38
 - Added a dropdown list to states to change the view settings
 
 peihuaH -- 2020-05-04 19:13
-- Added a button next to the dropdown list that would apply the changed view settings to the displayed charts 
+- Added a button next to the dropdown list that would apply the changed view settings to the states page charts
+
+peihuaH -- 2020-05-04 21:11
+- Made the transitions more smooth between different view settings for charts on the state pages
