@@ -86,4 +86,8 @@ peihuaH -- 2020-05-04 08:38
 - Added a dropdown list to states to change the view settings
 
 peihuaH -- 2020-05-04 19:13
-- Added a button next to the dropdown list that would apply the changed view settings to the displayed charts 
+- Added a button next to the dropdown list that would apply the changed view settings to the displayed charts
+
+jackieL -- 2020-05-04 20:38
+- modified parser function to get gender ratio for each state
+- rendered double bar chart for gender ratio of each state 
