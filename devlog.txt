@@ -102,4 +102,8 @@ jackieL -- 2020-05-04 23:25
 
 jackieL -- 2020-05-05 00:29
 - added dropdown menus to homepage and reorganized buttons
-- finished bubble chart for state population 
+- finished bubble chart for state population
+
+jackieL -- 2020-05-05 02:54
+- added choropleth map representing gender ratios in each state
+- added choropleth map representing ethnicity numbers in each state, with buttons to switch between ethnicities

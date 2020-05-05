@@ -23,7 +23,7 @@ let min = state_arr.reduce(function(a, b) { //get min population
 //console.log(dataset);
 
 //colors, from Observable HQ website
-let schemeBlues = ["#f7fbff","#f6faff","#f5fafe","#f5f9fe","#f4f9fe","#f3f8fe","#f2f8fd","#f2f7fd","#f1f7fd","#f0f6fd","#eff6fc","#eef5fc","#eef5fc","#edf4fc","#ecf4fb","#ebf3fb","#eaf3fb","#eaf2fb","#e9f2fa","#e8f1fa","#e7f1fa","#e7f0fa","#e6f0f9","#e5eff9","#e4eff9","#e3eef9","#e3eef8","#e2edf8","#e1edf8","#e0ecf8","#e0ecf7","#dfebf7","#deebf7","#ddeaf7","#ddeaf6","#dce9f6","#dbe9f6","#dae8f6","#d9e8f5","#d9e7f5","#d8e7f5","#d7e6f5","#d6e6f4","#d6e5f4","#d5e5f4","#d4e4f4","#d3e4f3","#d2e3f3","#d2e3f3","#d1e2f3","#d0e2f2","#cfe1f2","#cee1f2","#cde0f1","#cce0f1","#ccdff1","#cbdff1","#cadef0","#c9def0","#c8ddf0","#c7ddef","#c6dcef","#c5dcef","#c4dbee","#c3dbee","#c2daee","#c1daed","#c0d9ed","#bfd9ec","#bed8ec","#bdd8ec","#bcd7eb","#bbd7eb","#b9d6eb","#b8d5ea","#b7d5ea","#b6d4e9","#b5d4e9","#b4d3e9","#b2d3e8","#b1d2e8","#b0d1e7","#afd1e7","#add0e7","#acd0e6","#abcfe6","#a9cfe5","#a8cee5","#a7cde5","#a5cde4","#a4cce4","#a3cbe3","#a1cbe3","#a0cae3","#9ec9e2","#9dc9e2","#9cc8e1","#9ac7e1","#99c6e1","#97c6e0","#96c5e0","#94c4df","#93c3df","#91c3df","#90c2de","#8ec1de","#8dc0de","#8bc0dd","#8abfdd","#88bedc","#87bddc","#85bcdc","#84bbdb","#82bbdb","#81badb","#7fb9da","#7eb8da","#7cb7d9","#7bb6d9","#79b5d9","#78b5d8","#76b4d8","#75b3d7","#73b2d7","#72b1d7","#70b0d6","#6fafd6","#6daed5","#6caed5","#6badd5","#69acd4","#68abd4","#66aad3","#65a9d3","#63a8d2","#62a7d2","#61a7d1","#5fa6d1","#5ea5d0","#5da4d0","#5ba3d0","#5aa2cf","#59a1cf","#57a0ce","#569fce","#559ecd","#549ecd","#529dcc","#519ccc","#509bcb","#4f9acb","#4d99ca","#4c98ca","#4b97c9","#4a96c9","#4895c8","#4794c8","#4693c7","#4592c7","#4492c6","#4391c6","#4190c5","#408fc4","#3f8ec4","#3e8dc3","#3d8cc3","#3c8bc2","#3b8ac2","#3a89c1","#3988c1","#3787c0","#3686c0","#3585bf","#3484bf","#3383be","#3282bd","#3181bd","#3080bc","#2f7fbc","#2e7ebb","#2d7dbb","#2c7cba","#2b7bb9","#2a7ab9","#2979b8","#2878b8","#2777b7","#2676b6","#2574b6","#2473b5","#2372b4","#2371b4","#2270b3","#216fb3","#206eb2","#1f6db1","#1e6cb0","#1d6bb0","#1c6aaf","#1c69ae","#1b68ae","#1a67ad","#1966ac","#1865ab","#1864aa","#1763aa","#1662a9","#1561a8","#1560a7","#145fa6","#135ea5","#135da4","#125ca4","#115ba3","#115aa2","#1059a1","#1058a0","#0f579f","#0e569e","#0e559d","#0e549c","#0d539a","#0d5299","#0c5198","#0c5097","#0b4f96","#0b4e95","#0b4d93","#0b4c92","#0a4b91","#0a4a90","#0a498e","#0a488d","#09478c","#09468a","#094589","#094487","#094386","#094285","#094183","#084082","#083e80","#083d7f","#083c7d","#083b7c","#083a7a","#083979","#083877","#083776","#083674","#083573","#083471","#083370","#08326e","#08316d","#08306b"];
+let schemeBlues = ["#f7fcfd","#f6fcfd","#f6fcfd","#f5fbfd","#f5fbfc","#f4fbfc","#f4fbfc","#f3fafc","#f2fafc","#f2fafc","#f1fafc","#f1fafc","#f0f9fb","#f0f9fb","#eff9fb","#eef9fb","#eef8fb","#edf8fa","#edf8fa","#ecf8fa","#ebf8fa","#ebf7fa","#eaf7f9","#eaf7f9","#e9f7f9","#e8f6f9","#e8f6f8","#e7f6f8","#e6f6f8","#e6f5f7","#e5f5f7","#e4f5f7","#e4f5f6","#e3f4f6","#e2f4f6","#e2f4f5","#e1f4f5","#e0f3f4","#e0f3f4","#dff3f4","#def3f3","#ddf2f3","#ddf2f2","#dcf2f2","#dbf1f1","#daf1f1","#d9f1f0","#d9f0ef","#d8f0ef","#d7f0ee","#d6f0ee","#d5efed","#d4efec","#d3eeec","#d2eeeb","#d1eeeb","#d0edea","#cfede9","#ceede8","#cdece8","#ccece7","#cbebe6","#caebe6","#c9ebe5","#c7eae4","#c6eae3","#c5e9e3","#c4e9e2","#c2e8e1","#c1e8e0","#c0e7df","#bee7df","#bde6de","#bce6dd","#bae5dc","#b9e4db","#b7e4da","#b6e3da","#b4e3d9","#b3e2d8","#b1e2d7","#b0e1d6","#aee0d5","#ade0d4","#abdfd3","#aadfd2","#a8ded1","#a7ddd0","#a5ddcf","#a4dcce","#a2dbcd","#a0dbcc","#9fdacb","#9dd9ca","#9cd9c9","#9ad8c8","#98d7c7","#97d7c6","#95d6c5","#94d5c4","#92d5c3","#90d4c2","#8fd3c1","#8dd3c0","#8cd2bf","#8ad1be","#88d1bc","#87d0bb","#85cfba","#84cfb9","#82ceb8","#81cdb7","#7fcdb6","#7eccb4","#7ccbb3","#7bcbb2","#79cab1","#78c9b0","#76c9ae","#75c8ad","#73c7ac","#72c7ab","#70c6aa","#6fc5a8","#6dc5a7","#6cc4a6","#6ac3a4","#69c3a3","#68c2a2","#66c1a1","#65c19f","#64c09e","#62bf9d","#61bf9b","#60be9a","#5ebd98","#5dbd97","#5cbc96","#5bbb94","#59bb93","#58ba92","#57b990","#56b98f","#54b88d","#53b78c","#52b78b","#51b689","#50b588","#4fb486","#4db485","#4cb383","#4bb282","#4ab180","#49b17f","#48b07d","#47af7c","#46ae7b","#45ae79","#44ad78","#43ac76","#42ab75","#40aa73","#3fa972","#3ea870","#3da76f","#3ca66d","#3ba56c","#3aa56a","#39a469","#38a367","#37a266","#36a164","#35a063","#349f61","#339e60","#329d5e","#319c5d","#309b5c","#2f9a5a","#2e9959","#2d9757","#2c9656","#2b9555","#2a9453","#299352","#289251","#27914f","#26904e","#258f4d","#248e4c","#238d4a","#228c49","#218b48","#208a47","#1f8946","#1e8845","#1d8744","#1c8643","#1b8542","#1a8441","#198340","#18823f","#17813e","#16803d","#157f3c","#147e3b","#137d3a","#127c39","#117b38","#107a38","#107937","#0f7836","#0e7735","#0d7634","#0c7534","#0b7433","#0b7332","#0a7232","#097131","#087030","#086f2f","#076e2f","#066c2e","#066b2d","#056a2d","#05692c","#04682b","#04672b","#04662a","#03642a","#036329","#026228","#026128","#026027","#025e27","#015d26","#015c25","#015b25","#015a24","#015824","#015723","#005623","#005522","#005321","#005221","#005120","#005020","#004e1f","#004d1f","#004c1e","#004a1e","#00491d","#00481d","#00471c","#00451c","#00441b"];
 //console.log(schemeBlues.length)
 
 //variables
@@ -298,12 +298,28 @@ var render_eth_chart = function(){
       .call(legend);
 };
 
-var render_eth_map = function() {
-  var space = document.getElementById('chart');
-  space.innerHTML = "";
+let eth_map, eth_map_val, eth_max, eth_min, name;
+let eth_abbrev = {"asian": "Asian American", "white": "White", "black": "African American", "native": "Native American", "hispanic": "Hispanic", "pacific": "Pacific Islander"};
 
-
+var calculate_eth_values = function(nationality) {
+  eth_map = new Map();
+  eth_map_val = [];
+  for (i = 0; i < eth_data.length; i++){
+    eth_map.set(eth_data[i]['state'], eth_data[i][nationality]);
+    eth_map_val.push(eth_data[i][nationality]);
+  }
+  name = eth_abbrev[nationality];
+  eth_map = Object.assign(eth_map, {title: name + " Population (millions)"});
+  eth_max = eth_map_val.reduce(function(a, b){
+    return Math.max(a, b);
+  });
+  eth_min = eth_map_val.reduce(function(a, b){
+    return Math.min(a, b);
+  });
 };
+calculate_eth_values("white");
+
+let schemeYellows = ["#fff7ec","#fff7eb","#fff6ea","#fff6e9","#fff5e7","#fff5e6","#fff4e5","#fff4e4","#fff3e3","#fff3e2","#fff2e1","#fff2e0","#fff1de","#fff1dd","#fff0dc","#fff0db","#feefda","#feefd9","#feeed7","#feeed6","#feedd5","#feedd4","#feecd3","#feecd2","#feebd0","#feebcf","#feeace","#feeacd","#fee9cc","#fee9ca","#fee8c9","#fee8c8","#fee7c7","#fee7c6","#fee6c4","#fee5c3","#fee5c2","#fee4c1","#fee4bf","#fee3be","#fee3bd","#fee2bc","#fee1ba","#fee1b9","#fee0b8","#fee0b7","#fedfb5","#fedeb4","#fedeb3","#fdddb2","#fddcb1","#fddcaf","#fddbae","#fddaad","#fddaac","#fdd9ab","#fdd8a9","#fdd8a8","#fdd7a7","#fdd6a6","#fdd6a5","#fdd5a4","#fdd4a3","#fdd4a1","#fdd3a0","#fdd29f","#fdd29e","#fdd19d","#fdd09c","#fdcf9b","#fdcf9a","#fdce99","#fdcd98","#fdcc97","#fdcc96","#fdcb95","#fdca94","#fdc994","#fdc893","#fdc892","#fdc791","#fdc690","#fdc58f","#fdc48e","#fdc38d","#fdc28c","#fdc18b","#fdc08a","#fdbf89","#fdbe88","#fdbd87","#fdbc86","#fdbb85","#fdba84","#fdb983","#fdb882","#fdb781","#fdb680","#fdb57f","#fdb47d","#fdb27c","#fdb17b","#fdb07a","#fdaf79","#fdae78","#fdac76","#fdab75","#fdaa74","#fca873","#fca772","#fca671","#fca46f","#fca36e","#fca26d","#fca06c","#fc9f6b","#fc9e6a","#fc9c68","#fc9b67","#fb9a66","#fb9865","#fb9764","#fb9563","#fb9462","#fb9361","#fb9160","#fa905f","#fa8f5e","#fa8d5d","#fa8c5c","#f98b5b","#f9895a","#f98859","#f98759","#f88558","#f88457","#f88356","#f78155","#f78055","#f77f54","#f67d53","#f67c52","#f67b52","#f57951","#f57850","#f4774f","#f4754f","#f4744e","#f3734d","#f3714c","#f2704c","#f26f4b","#f16d4a","#f16c49","#f06b49","#f06948","#ef6847","#ef6646","#ee6545","#ed6344","#ed6243","#ec6042","#ec5f42","#eb5d41","#ea5c40","#ea5a3f","#e9593e","#e8573c","#e8563b","#e7543a","#e65339","#e65138","#e55037","#e44e36","#e44c35","#e34b34","#e24932","#e14831","#e04630","#e0442f","#df432e","#de412d","#dd402b","#dc3e2a","#dc3c29","#db3b28","#da3927","#d93826","#d83624","#d73423","#d63322","#d53121","#d43020","#d32e1f","#d22c1e","#d12b1d","#d0291b","#cf281a","#ce2619","#cd2518","#cc2317","#cb2216","#ca2015","#c91f14","#c81d13","#c71c12","#c61b11","#c51911","#c31810","#c2170f","#c1150e","#c0140d","#bf130c","#be120c","#bc110b","#bb100a","#ba0e09","#b80d09","#b70c08","#b60b07","#b50b07","#b30a06","#b20906","#b10805","#af0705","#ae0704","#ac0604","#ab0504","#a90503","#a80403","#a60402","#a50302","#a40302","#a20302","#a00201","#9f0201","#9d0201","#9c0101","#9a0101","#990101","#970101","#960100","#940100","#920000","#910000","#8f0000","#8e0000","#8c0000","#8a0000","#890000","#870000","#860000","#840000","#820000","#810000","#7f0000"];
 
 //-----------------------------------------------------------
 //gender data
@@ -327,7 +343,7 @@ let gen_min = gen_map_val.reduce(function(a, b) { //get min population
     return Math.min(a, b);
 });
 
-let schemePurples = ["#fcfbfd","#fcfbfd","#fbfafc","#fbfafc","#faf9fc","#faf9fc","#faf8fb","#f9f8fb","#f9f7fb","#f8f7fb","#f8f7fa","#f7f6fa","#f7f6fa","#f7f5fa","#f6f5f9","#f6f4f9","#f5f4f9","#f5f3f9","#f4f3f8","#f4f2f8","#f4f2f8","#f3f2f8","#f3f1f7","#f2f1f7","#f2f0f7","#f1f0f7","#f1eff6","#f0eff6","#f0eef6","#efeef5","#efedf5","#eeedf5","#eeecf5","#edecf4","#edebf4","#ecebf4","#ebeaf3","#ebe9f3","#eae9f3","#eae8f3","#e9e8f2","#e8e7f2","#e8e7f2","#e7e6f1","#e7e5f1","#e6e5f1","#e5e4f0","#e5e4f0","#e4e3f0","#e3e2ef","#e3e2ef","#e2e1ef","#e1e1ee","#e1e0ee","#e0dfee","#dfdfed","#dedeed","#dedded","#ddddec","#dcdcec","#dbdbec","#dbdaeb","#dadaeb","#d9d9ea","#d8d8ea","#d7d7ea","#d7d7e9","#d6d6e9","#d5d5e8","#d4d4e8","#d3d3e8","#d2d3e7","#d2d2e7","#d1d1e6","#d0d0e6","#cfcfe5","#cecee5","#cdcee5","#cccde4","#cbcce4","#cbcbe3","#cacae3","#c9c9e2","#c8c8e2","#c7c7e1","#c6c6e1","#c5c5e0","#c4c4e0","#c3c3df","#c2c3df","#c1c2de","#c0c1de","#bfc0dd","#bebfdd","#bebedc","#bdbddc","#bcbcdb","#bbbbda","#babada","#b9b9d9","#b8b8d9","#b7b7d8","#b6b5d8","#b5b4d7","#b4b3d6","#b3b2d6","#b2b1d5","#b1b0d5","#b0afd4","#afaed4","#aeadd3","#aeacd2","#adabd2","#acaad1","#aba9d1","#aaa8d0","#a9a7cf","#a8a6cf","#a7a5ce","#a6a4ce","#a5a3cd","#a4a2cd","#a3a1cc","#a2a0cb","#a19fcb","#a09eca","#9f9dca","#9e9cc9","#9e9ac9","#9d9ac8","#9c99c8","#9b98c7","#9a97c7","#9996c6","#9895c6","#9794c5","#9693c5","#9592c4","#9491c4","#9390c3","#928fc3","#918ec2","#908dc2","#908cc1","#8f8bc1","#8e8ac0","#8d89c0","#8c88bf","#8b87bf","#8a86be","#8985be","#8884bd","#8883bd","#8782bc","#8680bc","#857fbb","#847eba","#837dba","#827cb9","#827bb9","#817ab8","#8079b8","#7f77b7","#7e76b6","#7e75b6","#7d74b5","#7c73b4","#7b71b4","#7b70b3","#7a6fb3","#796eb2","#786cb1","#786bb1","#776ab0","#7668af","#7567af","#7566ae","#7465ad","#7363ad","#7362ac","#7261ab","#715fab","#705eaa","#705ca9","#6f5ba8","#6e5aa8","#6e58a7","#6d57a6","#6c56a6","#6c54a5","#6b53a4","#6a52a4","#6950a3","#694fa2","#684ea2","#674ca1","#674ba0","#664aa0","#65489f","#65479e","#64469e","#63449d","#63439c","#62429c","#61409b","#613f9a","#603e9a","#5f3c99","#5e3b99","#5e3a98","#5d3897","#5c3797","#5c3696","#5b3595","#5a3395","#5a3294","#593194","#582f93","#582e92","#572d92","#562b91","#562a91","#552990","#54288f","#54268f","#53258e","#52248e","#52238d","#51218c","#50208c","#501f8b","#4f1e8b","#4e1c8a","#4e1b8a","#4d1a89","#4c1988","#4c1788","#4b1687","#4a1587","#4a1486","#491286","#481185","#481084","#470f84","#460d83","#460c83","#450b82","#440a82","#440981","#430780","#420680","#42057f","#41047f","#40027e","#40017e","#3f007d"];
+let schemePurples = ["#f7f4f9","#f6f3f9","#f6f3f8","#f5f2f8","#f5f2f8","#f4f1f7","#f4f0f7","#f3f0f7","#f3eff6","#f2eff6","#f2eef6","#f1edf5","#f1edf5","#f0ecf5","#f0ebf4","#efebf4","#efeaf4","#eee9f3","#eee9f3","#ede8f3","#ede7f2","#ece6f2","#ece6f1","#ebe5f1","#ebe4f1","#eae3f0","#eae3f0","#e9e2ef","#e9e1ef","#e8e0ef","#e8dfee","#e7deee","#e6dded","#e6dced","#e5dbec","#e5dbec","#e4daeb","#e4d9eb","#e3d7ea","#e3d6e9","#e2d5e9","#e1d4e8","#e1d3e8","#e0d2e7","#e0d1e7","#dfd0e6","#dfcfe5","#decee5","#decce4","#ddcbe4","#dccae3","#dcc9e2","#dbc8e2","#dbc7e1","#dac5e0","#dac4e0","#d9c3df","#d9c2df","#d8c0de","#d8bfdd","#d7bedd","#d7bddc","#d6bcdb","#d6badb","#d5b9da","#d5b8da","#d4b7d9","#d4b6d8","#d3b4d8","#d3b3d7","#d3b2d6","#d2b1d6","#d2b0d5","#d1aed5","#d1add4","#d1acd3","#d0abd3","#d0aad2","#d0a8d2","#d0a7d1","#cfa6d0","#cfa5d0","#cfa4cf","#cfa2ce","#cea1ce","#cea0cd","#ce9fcd","#ce9dcc","#ce9ccb","#ce9bcb","#ce9aca","#ce98c9","#ce97c9","#ce96c8","#ce94c7","#ce93c7","#cf92c6","#cf91c5","#cf8fc5","#cf8ec4","#d08cc3","#d08bc3","#d08ac2","#d188c1","#d187c1","#d186c0","#d284bf","#d283bf","#d381be","#d380bd","#d47ebc","#d47dbc","#d57bbb","#d57aba","#d678b9","#d677b8","#d775b8","#d774b7","#d872b6","#d871b5","#d96fb4","#d96db3","#da6cb3","#da6ab2","#db69b1","#db67b0","#dc65af","#dc64ae","#dd62ad","#dd60ac","#de5fab","#de5daa","#df5ba9","#df59a8","#df58a7","#e056a6","#e054a5","#e053a4","#e151a3","#e14fa2","#e14da0","#e24c9f","#e24a9e","#e2489d","#e2479c","#e2459b","#e24399","#e24298","#e34097","#e33e96","#e33d94","#e33b93","#e33a92","#e33890","#e2378f","#e2358e","#e2348c","#e2328b","#e2318a","#e23088","#e12e87","#e12d85","#e12c84","#e02b82","#e02a81","#df2880","#df277e","#df267d","#de257b","#dd247a","#dd2378","#dc2277","#dc2175","#db2074","#da2072","#d91f71","#d91e6f","#d81d6e","#d71c6d","#d61b6b","#d51b6a","#d41a68","#d31967","#d21866","#d11864","#d01763","#cf1662","#ce1661","#cd155f","#cc145e","#cb145d","#c9135c","#c8125b","#c7125a","#c61159","#c41058","#c31057","#c20f56","#c00f55","#bf0e54","#bd0d53","#bc0d52","#ba0c51","#b90c50","#b70b4f","#b60b4f","#b40a4e","#b30a4d","#b1094c","#b0094b","#ae084b","#ac084a","#ab0749","#a90748","#a80648","#a60647","#a40546","#a30545","#a10544","#a00444","#9e0443","#9c0442","#9b0341","#990340","#97033f","#96033f","#94023e","#93023d","#91023c","#8f023b","#8e013a","#8c0139","#8b0138","#890137","#880136","#860135","#840134","#830133","#810032","#800031","#7e0030","#7d002f","#7b002d","#79002c","#78002b","#76002a","#750029","#730028","#720027","#700026","#6f0025","#6d0024","#6c0022","#6a0021","#690020","#67001f"];
 
 var render_gen_chart = function(){
   var space = document.getElementById('chart');
@@ -434,6 +450,7 @@ var color, colorScale;
 var render = function(e){
   var display = display_dropdown.options[display_dropdown.selectedIndex].value;
   var value = value_dropdown.options[value_dropdown.selectedIndex].value;
+  document.getElementById("ethform").style.display = "none";
 
   if (display == 0){ //map
     if (value == 0){ //population
@@ -442,11 +459,18 @@ var render = function(e){
         .range(schemeBlues.slice(0, schemeBlues.length));
       colorScale = d3.scaleQuantize()
         .domain([min, max])
-        .range(d3.schemeBlues[8]);
+        .range(d3.schemeBuGn[8]);
       render_map(state_data, color, colorScale, min, max, ".2s");
     }
     else if (value == 1){ //ethnicity
-      //render_map
+      document.getElementById("ethform").style.display = "block";
+      color = d3.scaleQuantize()
+        .domain([eth_min, eth_max])
+        .range(schemeYellows.slice(0, schemeYellows.length));
+      colorScale = d3.scaleQuantize()
+        .domain([eth_min, eth_max])
+        .range(d3.schemeOrRd[8]);
+      render_map(eth_map, color, colorScale, eth_min, eth_max, ".2s");
     }
     else { //gender ratio
       color = d3.scaleQuantize()
@@ -454,7 +478,7 @@ var render = function(e){
         .range(schemePurples.slice(0, schemePurples.length));
       colorScale = d3.scaleQuantize()
         .domain([gen_min, gen_max])
-        .range(d3.schemePurples[8]);
+        .range(d3.schemePuRd[8]);
       render_map(gen_map, color, colorScale, gen_min, gen_max, ",.1%");
     }
   }
@@ -469,6 +493,11 @@ var render = function(e){
       render_gen_chart();
     }
   }
+};
+
+var render_eth_map = function(nationality){
+  calculate_eth_values(nationality);
+  render();
 };
 
 renderbtn.addEventListener('click', render);
