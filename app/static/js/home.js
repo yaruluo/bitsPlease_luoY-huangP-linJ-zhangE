@@ -209,8 +209,85 @@ eth.addEventListener('click', render_eth);
 //-----------------------------------------------------------
 //gender data
 var gen = document.getElementById("gen");
+let gen_arr = [];
+for (i = 0; i < gender_data.length; i++){
+  gen_arr.push(gender_data[i]['mratio']);
+  gen_arr.push(gender_data[i]['fratio']);
+}
+let rmax = gen_arr.reduce(function(a, b) { //get max ratio
+    return Math.max(a, b);
+});
+//console.log(rmax);
 
 var render_gen = function(e){
+  var space = document.getElementById('genchart');
+  space.innerHTML = "";
+
+  var groupKey = 'abbrev';
+  var keys = ['mratio', 'fratio'];
+  var margin = ({top: 10, right: 10, bottom: 20, left: 40}),
+      height = 500,
+      width = 975 + margin.right + margin.left;
+
+  var x0 = d3.scaleBand()
+    .domain(gender_data.map(d => d[groupKey]))
+    .rangeRound([margin.left, width - margin.right])
+    .paddingInner(0.1);
+
+  var x1 = d3.scaleBand()
+    .domain(keys)
+    .rangeRound([0, x0.bandwidth()])
+    .padding(0.05);
+
+  var y = d3.scaleLinear()
+    .domain([0, rmax]).nice()
+    .rangeRound([height - margin.bottom, margin.top]);
+
+  var color = d3.scaleOrdinal()
+    .range(["#bae1ff", "#ffd1dc"]);
+
+  var xAxis = g => g
+    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x0).tickSizeOuter(0))
+    .call(g => g.select(".domain").remove());
+
+  var yAxis = g => g
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y).ticks(null, "%"))
+    .call(g => g.select(".domain").remove())
+    .call(g => g.select(".tick:last-of-type text").clone()
+        .attr("x", 3)
+        .attr("text-anchor", "start")
+        .attr("font-weight", "bold")
+        .text(gender_data.y));
+
+  var svg = d3.select('#genchart')
+    .append('svg')
+      .attr('width', width)
+      .attr('height', height);
+
+  svg.append("g")
+    .selectAll("g")
+    .data(gender_data)
+    .join("g")
+      .attr("transform", d => `translate(${x0(d[groupKey])},0)`)
+    .selectAll("rect")
+    .data(d => keys.map(key => ({key, value: d[key]})))
+    .join("rect")
+      .attr("x", d => x1(d.key))
+      .attr("y", d => y(d.value))
+      .attr("width", x1.bandwidth())
+      .attr("height", d => y(0) - y(d.value))
+      .attr("fill", d => color(d.key));
+
+  svg.append("g")
+      .call(xAxis);
+
+  svg.append("g")
+      .call(yAxis);
+  //
+  // svg.append("g")
+  //     .call(legend);
 
 };
 

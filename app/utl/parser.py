@@ -77,11 +77,11 @@ def get_gender_by_state():
                 temp_pop = int(row['TotalPop'])
                 state = row['State']
                 total += temp_pop
-                male += float(row['Men']) * temp_pop / 100
-                female += float(row['Women']) * temp_pop / 100
+                male += float(row['Men'])
+                female += float(row['Women'])
             elif state != "":
                 data.append({'state': state, 'male': int(male), 'female': int(female),
-                             'total': total, 'abbrev': ABBREV[state]})
+                             'mratio': float(male) / total, 'fratio': float(female) / total, 'total': total, 'abbrev': ABBREV[state]})
                 state = ""
                 total = female = male = 0
     return data
