@@ -25,111 +25,110 @@ let schemeBlues = ["#f7fbff","#f6faff","#f5fafe","#f5f9fe","#f4f9fe","#f3f8fe","
 //console.log(schemeBlues.length)
 
 //variables
-let created = false;
 let us;
 let pathData;
 let path;
 
-document.getElementById('pop').addEventListener('click', async () => {
-  if (!created){ //map should only be created once
-    pathData = await getMapData();
-    path = d3.geoPath();
-    let format = d3.format("d");
+var render_pop = async function(e){
+  var space = document.getElementById('chart');
+  space.innerHTML = "";
+  
+  pathData = await getMapData();
+  path = d3.geoPath();
+  let format = d3.format("d");
 
-    //create color scale
-    let color = d3.scaleQuantize()
-      .domain([min, max])
-      .range(schemeBlues.slice(0, schemeBlues.length));
-    let colorScale = d3.scaleQuantize()
-      .domain([min, max])
-      .range(d3.schemeBlues[8]);
+  //create color scale
+  let color = d3.scaleQuantize()
+    .domain([min, max])
+    .range(schemeBlues.slice(0, schemeBlues.length));
+  let colorScale = d3.scaleQuantize()
+    .domain([min, max])
+    .range(d3.schemeBlues[8]);
 
-    //create map
-    const svg = d3.select('#popchart')
-      .append('svg')
-      .attr("viewBox", [0, 0, 975, 610]);
+  //create map
+  const svg = d3.select('#chart')
+    .append('svg')
+    .attr("viewBox", [0, 0, 975, 610]);
 
-    //fill in state colors
-    svg.append("g")
-      .selectAll("path")
-      .data(pathData)
-      .enter().append("a")
-      .attr("xlink:href", d => "/"+ d.properties.name)
-        .append("path")
-          .attr("fill", d => color(state_data.get(d.properties.name)))
-          .attr("d", path);
+  //fill in state colors
+  svg.append("g")
+    .selectAll("path")
+    .data(pathData)
+    .enter().append("a")
+    .attr("xlink:href", d => "/"+ d.properties.name)
+      .append("path")
+        .attr("fill", d => color(state_data.get(d.properties.name)))
+        .attr("d", path);
 
-    //label all the states
-    svg.selectAll("text")
-      .data(pathData)
-      .enter().append("svg:text")
-        .text(d => state_abbrev[d.properties.name])
-        .attr("x", d => path.centroid(d)[0])
-        .attr("y", d=> path.centroid(d)[1])
-        .attr("text-anchor","middle")
-        .attr('font-size','8px')
-        .attr('font-weight', 'bold');
+  //label all the states
+  svg.selectAll("text")
+    .data(pathData)
+    .enter().append("svg:text")
+      .text(d => state_abbrev[d.properties.name])
+      .attr("x", d => path.centroid(d)[0])
+      .attr("y", d=> path.centroid(d)[1])
+      .attr("text-anchor","middle")
+      .attr('font-size','8px')
+      .attr('font-weight', 'bold');
 
-    //create state borders
-    svg.append("path")
-      .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
-      .attr("fill", "none")
-      .attr("stroke", "white")
-      .attr("stroke-linejoin", "round")
-      .attr("d", path);
+  //create state borders
+  svg.append("path")
+    .datum(topojson.mesh(us, us.objects.states, (a, b) => a !== b))
+    .attr("fill", "none")
+    .attr("stroke", "white")
+    .attr("stroke-linejoin", "round")
+    .attr("d", path);
 
-    legend = g => {
-      const x = d3.scaleLinear()
-          .domain(d3.extent(colorScale.domain()))
-          .rangeRound([0, 300]);
+  legend = g => {
+    const x = d3.scaleLinear()
+        .domain(d3.extent(colorScale.domain()))
+        .rangeRound([0, 300]);
 
-      g.selectAll("rect")
-        .data(colorScale.range().map(d => colorScale.invertExtent(d)))
-        .join("rect")
-          .attr("height", 8)
-          .attr("x", d => x(d[0]))
-          .attr("width", d => x(d[1]) - x(d[0]))
-          .attr("fill", d => color(d[0]));
+    g.selectAll("rect")
+      .data(colorScale.range().map(d => colorScale.invertExtent(d)))
+      .join("rect")
+        .attr("height", 8)
+        .attr("x", d => x(d[0]))
+        .attr("width", d => x(d[1]) - x(d[0]))
+        .attr("fill", d => color(d[0]));
 
-      g.append("text")
-          .attr("class", "caption")
-          .attr("x", x.range()[0])
-          .attr("y", -6)
-          .attr("fill", "#000")
-          .attr("text-anchor", "start")
-          .attr("font-weight", "bold")
-          .text(state_data.title);
+    g.append("text")
+        .attr("class", "caption")
+        .attr("x", x.range()[0])
+        .attr("y", -6)
+        .attr("fill", "#000")
+        .attr("text-anchor", "start")
+        .attr("font-weight", "bold")
+        .text(state_data.title);
 
-      g.call(d3.axisBottom(x)
-          .tickSize(13)
-          .tickFormat(d3.format(".2s"))
-          .tickValues(colorScale.range().slice(1).map(d => colorScale.invertExtent(d)[0])))
-        .select(".domain")
-          .remove();
-    };
+    g.call(d3.axisBottom(x)
+        .tickSize(13)
+        .tickFormat(d3.format(".2s"))
+        .tickValues(colorScale.range().slice(1).map(d => colorScale.invertExtent(d)[0])))
+      .select(".domain")
+        .remove();
+  };
 
-    svg.append("g")
-      .attr("transform", "translate(600,40)")
-      .call(legend);
-
-    created = true;
-  }
-  else { //map has already been created
-
-  }
-});
+  svg.append("g")
+    .attr("transform", "translate(600,40)")
+    .call(legend);
+};
 
 const getMapData = async () => {
   us = await d3.json('static/json/states-albers-10m.json');
   return topojson.feature(us, us.objects.states).features;
 };
 
+var pop = document.getElementById('pop');
+pop.addEventListener('click', render_pop);
+
+
 //-----------------------------------------------------------
 //ethnicity data
 var eth = document.getElementById('eth');
 
 var render_eth = function(e){
-  var space = document.getElementById('ethchart');
+  var space = document.getElementById('chart');
   space.innerHTML = "";
   var columns = ['hispanic', 'white', 'black', 'native', 'asian', 'pacific'];
   // console.log(d3.stack().keys(columns)(dataset));
@@ -209,7 +208,7 @@ var render_eth = function(e){
           .attr("y", 9)
           .attr("dy", "0.35em")
           .text(d => d))
-  const svg = d3.select('#ethchart')
+  const svg = d3.select('#chart')
     .append('svg')
       .attr('width', width)
       .attr('height', height)
@@ -253,7 +252,7 @@ let rmax = gen_arr.reduce(function(a, b) { //get max ratio
 //console.log(rmax);
 
 var render_gen = function(e){
-  var space = document.getElementById('genchart');
+  var space = document.getElementById('chart');
   space.innerHTML = "";
 
   var groupKey = 'abbrev';
@@ -318,7 +317,7 @@ var render_gen = function(e){
         .text(d => d);
   };
 
-  var svg = d3.select('#genchart')
+  var svg = d3.select('#chart')
     .append('svg')
       .attr('width', width)
       .attr('height', height);
