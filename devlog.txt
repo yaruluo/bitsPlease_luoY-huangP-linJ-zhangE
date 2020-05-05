@@ -95,3 +95,6 @@ jackieL -- 2020-05-04 20:38
 peihuaH -- 2020-05-04 21:11
 - Made the transitions more smooth between different view settings for charts on the state pages
 - Added a button next to the dropdown list that would apply the changed view settings to the displayed charts
+
+jackieL -- 2020-05-04 23:25
+- added legends for state population and gender ratio by state charts

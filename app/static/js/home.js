@@ -11,7 +11,7 @@ for (i = 0; i < data.length; i++){
   state_arr.push(parseInt(data[i]['pop']));
   state_abbrev[data[i]['state']] = data[i]['abbrev'];
 }
-state_data = Object.assign(state_data, {title: "Population"});
+state_data = Object.assign(state_data, {title: "Population (in millions)"});
 let max = state_arr.reduce(function(a, b) { //get max population
     return Math.max(a, b);
 });
@@ -40,6 +40,9 @@ document.getElementById('pop').addEventListener('click', async () => {
     let color = d3.scaleQuantize()
       .domain([min, max])
       .range(schemeBlues.slice(0, schemeBlues.length));
+    let colorScale = d3.scaleQuantize()
+      .domain([min, max])
+      .range(d3.schemeBlues[8]);
 
     //create map
     const svg = d3.select('#popchart')
@@ -75,6 +78,40 @@ document.getElementById('pop').addEventListener('click', async () => {
       .attr("stroke-linejoin", "round")
       .attr("d", path);
 
+    legend = g => {
+      const x = d3.scaleLinear()
+          .domain(d3.extent(colorScale.domain()))
+          .rangeRound([0, 300]);
+
+      g.selectAll("rect")
+        .data(colorScale.range().map(d => colorScale.invertExtent(d)))
+        .join("rect")
+          .attr("height", 8)
+          .attr("x", d => x(d[0]))
+          .attr("width", d => x(d[1]) - x(d[0]))
+          .attr("fill", d => color(d[0]));
+
+      g.append("text")
+          .attr("class", "caption")
+          .attr("x", x.range()[0])
+          .attr("y", -6)
+          .attr("fill", "#000")
+          .attr("text-anchor", "start")
+          .attr("font-weight", "bold")
+          .text(state_data.title);
+
+      g.call(d3.axisBottom(x)
+          .tickSize(13)
+          .tickFormat(d3.format(".2s"))
+          .tickValues(colorScale.range().slice(1).map(d => colorScale.invertExtent(d)[0])))
+        .select(".domain")
+          .remove();
+    };
+
+    svg.append("g")
+      .attr("transform", "translate(600,40)")
+      .call(legend);
+
     created = true;
   }
   else { //map has already been created
@@ -85,10 +122,6 @@ document.getElementById('pop').addEventListener('click', async () => {
 const getMapData = async () => {
   us = await d3.json('static/json/states-albers-10m.json');
   return topojson.feature(us, us.objects.states).features;
-};
-
-const addLabels = () => {
-
 };
 
 //-----------------------------------------------------------
@@ -227,7 +260,7 @@ var render_gen = function(e){
   var keys = ['mratio', 'fratio'];
   var margin = ({top: 10, right: 10, bottom: 20, left: 40}),
       height = 500,
-      width = 975 + margin.right + margin.left;
+      width = 1000 + margin.right + margin.left;
 
   var x0 = d3.scaleBand()
     .domain(gender_data.map(d => d[groupKey]))
@@ -261,6 +294,30 @@ var render_gen = function(e){
         .attr("font-weight", "bold")
         .text(gender_data.y));
 
+  var legend = svg => {
+    const g = svg
+        .attr("transform", `translate(${width},0)`)
+        .attr("text-anchor", "end")
+        .attr("font-family", "sans-serif")
+        .attr("font-size", 10)
+      .selectAll("g")
+      .data(color.domain().slice().reverse())
+      .join("g")
+        .attr("transform", (d, i) => `translate(0,${i * 20})`);
+
+    g.append("rect")
+        .attr("x", -19)
+        .attr("width", 19)
+        .attr("height", 19)
+        .attr("fill", color);
+
+    g.append("text")
+        .attr("x", -24)
+        .attr("y", 9.5)
+        .attr("dy", "0.35em")
+        .text(d => d);
+  };
+
   var svg = d3.select('#genchart')
     .append('svg')
       .attr('width', width)
@@ -285,10 +342,9 @@ var render_gen = function(e){
 
   svg.append("g")
       .call(yAxis);
-  //
-  // svg.append("g")
-  //     .call(legend);
 
+  svg.append("g")
+      .call(legend);
 };
 
 gen.addEventListener('click', render_gen);
