@@ -99,3 +99,7 @@ peihuaH -- 2020-05-04 21:11
 jackieL -- 2020-05-04 23:25
 - added legends for state population and gender ratio by state charts
 - rearranged buttons to reflect design doc intentions
+
+jackieL -- 2020-05-05 00:29
+- added dropdown menus to homepage and reorganized buttons
+- finished bubble chart for state population 
