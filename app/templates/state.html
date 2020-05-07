@@ -1,20 +1,25 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Home
+	{{ name }}
 {% endblock %}
 
 {% block body %}
+<h2>{{name}}</h2>
 <span>
-	<select id="order">
-		<option value="0" selected="selected">Alphabetical</option>
-		<option value="1">Ascending</option>
-		<option value="2">Decending</option>
-	</select>
-	<button id="change">Update Graph</button>
+	<div class="row justify-content-center">
+		<div class="col-sm-3">
+			<select id="order" class="custom-select" style="display:none">
+				<option value="0">Alphabetical</option>
+				<option value="1">Ascending</option>
+				<option value="2">Descending</option>
+			</select>
+		</div>
+		<button class="btn btn-primary" id="change" style="display:none">Update</button>
+	</div>
 </span>
+<button class="btn btn-primary" id="pop">Population</button>
 <br>
-<button id="pop">Population</button>
 <div id="popchart">
 </div>
 {% endblock %}

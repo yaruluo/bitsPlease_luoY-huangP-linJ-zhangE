@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Country
+{% endblock %}
+
+{% block body %}
+<h1>Country</h1>
+<span>
+	<div class="row justify-content-center">
+		<div class="col-lg-2">
+			<select id="display" class="custom-select">
+			  <option value="0">Map</option>
+			  <option value="1">Chart</option>
+			</select>
+		</div>
+		<div class="col-lg-2">
+			<select id="value" class="custom-select">
+			  <option value="0">Population</option>
+			  <option value="1">Ethnicity</option>
+				<option value="2">Gender Ratio</option>
+			</select>
+		</div>
+		<button class="btn btn-primary" id="renderbtn">Render</button>
+	</div>
+</span>
+<div style="display:none" id="ethform">
+	<br>
+  <button class="btn btn-outline-primary" id="white" onclick="render_eth_map('white')">White</button>
+  <button class="btn btn-outline-primary" id="asian" onclick="render_eth_map('asian')">Asian</button>
+	<button class="btn btn-outline-primary" id="black" onclick="render_eth_map('black')">African American</button>
+	<button class="btn btn-outline-primary" id="hispanic" onclick="render_eth_map('hispanic')">Hispanic</button>
+	<button class="btn btn-outline-primary" id="native" onclick="render_eth_map('native')">Native American</button>
+	<button class="btn btn-outline-primary" id="pacific" onclick="render_eth_map('pacific')">Pacific Islander</button>
+</div>
+<div id="chart">
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+  var data = {{ data|tojson }};
+	var eth_data = {{ eth_data|tojson }};
+	var gender_data = {{ gender_data|tojson }};
+</script>
+<script src="{{url_for('static', filename='js/country.js')}}"></script>
+<script src="https://unpkg.com/topojson-client@3"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+{% endblock %}

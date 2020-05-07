@@ -4,40 +4,71 @@
 	Home
 {% endblock %}
 
-{% block body %}
-<span>
-	<select id="display">
-		<option value="0" selected="selected">Map</option>
-		<option value="1">Chart</option>
-	</select>
-	<select id="value">
-		<option value="0" selected="selected">Population</option>
-		<option value="1">Ethnicity</option>
-		<option value="2">Gender Ratio</option>
-	</select>
-	<button id="renderbtn">Render</button>
-</span>
-<br><br>
-<div style="display:none" id="ethform">
-  <button id="white" onclick="render_eth_map('white')">White</button>
-  <button id="asian" onclick="render_eth_map('asian')">Asian</button>
-	<button id="black" onclick="render_eth_map('black')">African American</button>
-	<button id="hispanic" onclick="render_eth_map('hispanic')">Hispanic</button>
-	<button id="native" onclick="render_eth_map('native')">Native American</button>
-	<button id="pacific" onclick="render_eth_map('pacific')">Pacific Islander</button>
-</div>
-<br>
-<div id="chart">
-</div>
+{% block style %}
+<style>
+  .jumbotron {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    margin-bottom: 0;
+    background-color: #fff;
+  }
+  @media (min-width: 768px) {
+    .jumbotron {
+      padding-top: 6rem;
+      padding-bottom: 6rem;
+    }
+  }
+
+  .jumbotron p:last-child {
+    margin-bottom: 0;
+  }
+
+  .jumbotron h1 {
+    font-weight: 300;
+  }
+
+  .jumbotron .container {
+    max-width: 40rem;
+  }
+</style>
 {% endblock %}
 
-{% block script %}
-<script type="text/javascript">
-  var data = {{ data|tojson }};
-	var eth_data = {{ eth_data|tojson }};
-	var gender_data = {{ gender_data|tojson }};
-</script>
-<script src="{{url_for('static', filename='js/home.js')}}"></script>
-<script src="https://unpkg.com/topojson-client@3"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+{% block body %}
+<section class="jumbotron text-center">
+  <div class="container">
+    <h1 class="display-4">Hello, world!</h1>
+    <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+    <p>
+      <a class="btn btn-primary btn-lg" href="/info" role="button">Learn more</a>
+    </p>
+  </div>
+</section>
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Country</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <br>
+            <a href="/country" class="btn btn-outline-primary">Go to Country View</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">State</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <br>
+            <a href="/search" class="btn btn-outline-primary">Search Up a State</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

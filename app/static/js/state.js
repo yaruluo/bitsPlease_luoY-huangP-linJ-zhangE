@@ -58,6 +58,9 @@ var render_pop = function(e){
   svg.append("g")
       .call(yAxis);
 
+  dropdown.style.display = "block";
+  change.style.display = "block";
+  pop.style.display = "none";
 };
 
 var update_pop = function(e){
@@ -110,4 +113,5 @@ change.addEventListener('click', function(){
   if (space.innerHTML != ""){
     update_pop();
   };
+  pop.style.display = "none";
 });

@@ -107,3 +107,7 @@ jackieL -- 2020-05-05 00:29
 jackieL -- 2020-05-05 02:54
 - added choropleth map representing gender ratios in each state
 - added choropleth map representing ethnicity numbers in each state, with buttons to switch between ethnicities
+
+jackieL -- 2020-05-07 03:47
+- added style to all of the pages
+- added new route for searching for states

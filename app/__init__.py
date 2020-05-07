@@ -3,7 +3,7 @@
 #P04 -- Let the Data Speak
 #2020-05-11
 
-from flask import Flask , render_template,request, redirect, url_for, session, flash
+from flask import Flask , render_template,request, redirect, url_for
 import os, random
 from utl import parser
 
@@ -12,20 +12,32 @@ app.secret_key = os.urandom(32)
 
 @app.route("/")
 def home():
+    return render_template('home.html', home='active')
+
+@app.route("/country")
+def country():
     data = parser.get_data_by_state()
     eth_data = parser.get_ethnicity_by_state()
     gender_data = parser.get_gender_by_state()
     print(gender_data);
-    return render_template('home.html', data=data, eth_data=eth_data, gender_data=gender_data, home="active")
+    return render_template('country.html', data=data, eth_data=eth_data, gender_data=gender_data, country="active")
 
 @app.route("/info")
 def info():
-    return "INFO"
+    return render_template('info.html', info='active')
+
+@app.route('/search')
+def search():
+    if (request.args):
+        if ('query' in request.args):
+            query = request.args['query']
+            return redirect(url_for('state', state=query))
+    return render_template('search.html', state='active')
 
 @app.route('/<state>')
 def state(state):
     data = parser.get_data_by_county(state)
-    return render_template('state.html', data = data)
+    return render_template('state.html', data = data, state='active', name=state)
 
 if __name__ == "__main__":
     app.debug = True
