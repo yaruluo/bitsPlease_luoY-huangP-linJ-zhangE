@@ -111,3 +111,5 @@ jackieL -- 2020-05-05 02:54
 jackieL -- 2020-05-07 03:47
 - added style to all of the pages
 - added new route for searching for states
+- updated design doc with additional components
+  - site map and diagrams to be updated in near future
