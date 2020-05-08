@@ -4,6 +4,27 @@
 	Country
 {% endblock %}
 
+{% block style %}
+<style>
+	.state {
+	    stroke: #fff;
+	    stroke-width:1px;
+	}
+	.d3-tip {
+	  line-height: 1;
+	  padding: 10px;
+	  background: rgba(255,255,255, 0.8);
+		border: 1px solid #aaa;
+	  color: #000;
+	  border-radius: 5px;
+	}
+	.desc {
+		line-height:1.4;
+		color:#888;
+	}
+</style>
+{% endblock %}
+
 {% block body %}
 <h1>Country</h1>
 <span>

@@ -31,28 +31,67 @@ let us;
 let pathData;
 let path;
 
-var render_map = async function(data, color, colorScale, min, max, num){
+var render_map = async function(data, color, colorScale, min, max, num, val){
   var space = document.getElementById('chart');
   space.innerHTML = "";
 
   pathData = await getMapData();
   path = d3.geoPath();
   let format = d3.format("d");
+  let formatComma = d3.format(",");
+  let formatPercent = d3.format(",.2%");
+
+  if (val == 0){
+    var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .direction('n')
+      .html(function(d) {
+        return "<center><b>" + d.properties.name + "</b></center>" + "<br/><span class='desc'>Population: " + formatComma(data.get(d.properties.name)) + "</span>"
+      });
+  }
+  else if (val == 1){
+    var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .direction('n')
+      .html(function(d) {
+        return "<center><b>" + d.properties.name + "</b></center>" +
+              "<br><span class='desc'>" + name + " Population: " + formatComma(eth_map.get(d.properties.name)) +
+              "<br>" + "% of Total Pop: " + formatPercent(eth_percent.get(d.properties.name)) + "</span>"
+    });
+  }
+  else {
+    var tip = d3.tip()
+      .attr('class', 'd3-tip')
+      .offset([-10, 0])
+      .direction('n')
+      .html(function(d) {
+        return "<center><b>" + d.properties.name + "</b></center>" +
+              "<br><span class='desc'>" + "Female-to-Male Ratio: " + formatPercent(gen_map.get(d.properties.name)) + "</span>"
+    });
+  }
 
   //create map
   const svg = d3.select('#chart')
     .append('svg')
     .attr("viewBox", [0, 0, 975, 610]);
 
+  svg.call(tip);
+
   //fill in state colors
   svg.append("g")
     .selectAll("path")
     .data(pathData)
     .enter().append("a")
+    .attr("class", function(d){ return "state" } )
+    .attr("id", function(d){ return d.properties.name } )
     .attr("xlink:href", d => "/"+ d.properties.name)
       .append("path")
         .attr("fill", d => color(data.get(d.properties.name)))
-        .attr("d", path);
+        .attr("d", path)
+        .on("mouseover", tip.show)
+        .on("mouseleave", tip.hide);
 
   //label all the states
   svg.selectAll("text")
@@ -298,14 +337,16 @@ var render_eth_chart = function(){
       .call(legend);
 };
 
-let eth_map, eth_map_val, eth_max, eth_min, name;
+let eth_map, eth_percent, eth_map_val, eth_max, eth_min, name;
 let eth_abbrev = {"asian": "Asian American", "white": "White", "black": "African American", "native": "Native American", "hispanic": "Hispanic", "pacific": "Pacific Islander"};
 
 var calculate_eth_values = function(nationality) {
   eth_map = new Map();
+  eth_percent = new Map();
   eth_map_val = [];
   for (i = 0; i < eth_data.length; i++){
     eth_map.set(eth_data[i]['state'], eth_data[i][nationality]);
+    eth_percent.set(eth_data[i]['state'], eth_data[i][nationality] / eth_data[i]['total']);
     eth_map_val.push(eth_data[i][nationality]);
   }
   name = eth_abbrev[nationality];
@@ -329,13 +370,13 @@ let gen_map_val = [];
 for (i = 0; i < gender_data.length; i++){
   gen_arr.push(gender_data[i]['mratio']);
   gen_arr.push(gender_data[i]['fratio']);
-  gen_map.set(gender_data[i]['state'], gender_data[i]['male'] / gender_data[i]['female']);
-  gen_map_val.push(gender_data[i]['male'] / gender_data[i]['female']);
+  gen_map.set(gender_data[i]['state'], gender_data[i]['female'] / gender_data[i]['male']);
+  gen_map_val.push(gender_data[i]['female'] / gender_data[i]['male']);
 }
 let rmax = gen_arr.reduce(function(a, b) { //get max ratio
     return Math.max(a, b);
 });
-gen_map = Object.assign(gen_map, {title: "Male-to-Female Ratio"});
+gen_map = Object.assign(gen_map, {title: "Female-to-Male Ratio"});
 let gen_max = gen_map_val.reduce(function(a, b) { //get max population
     return Math.max(a, b);
 });
@@ -460,7 +501,7 @@ var render = function(e){
       colorScale = d3.scaleQuantize()
         .domain([min, max])
         .range(d3.schemeBuGn[8]);
-      render_map(state_data, color, colorScale, min, max, ".2s");
+      render_map(state_data, color, colorScale, min, max, ".2s", 0);
     }
     else if (value == 1){ //ethnicity
       document.getElementById("ethform").style.display = "block";
@@ -470,7 +511,7 @@ var render = function(e){
       colorScale = d3.scaleQuantize()
         .domain([eth_min, eth_max])
         .range(d3.schemeOrRd[8]);
-      render_map(eth_map, color, colorScale, eth_min, eth_max, ".2s");
+      render_map(eth_map, color, colorScale, eth_min, eth_max, ".2s", 1);
     }
     else { //gender ratio
       color = d3.scaleQuantize()
@@ -479,7 +520,7 @@ var render = function(e){
       colorScale = d3.scaleQuantize()
         .domain([gen_min, gen_max])
         .range(d3.schemePuRd[8]);
-      render_map(gen_map, color, colorScale, gen_min, gen_max, ",.1%");
+      render_map(gen_map, color, colorScale, gen_min, gen_max, ",.1%", 2);
     }
   }
   else {

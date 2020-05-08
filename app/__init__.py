@@ -19,7 +19,6 @@ def country():
     data = parser.get_data_by_state()
     eth_data = parser.get_ethnicity_by_state()
     gender_data = parser.get_gender_by_state()
-    print(gender_data);
     return render_template('country.html', data=data, eth_data=eth_data, gender_data=gender_data, country="active")
 
 @app.route("/info")
