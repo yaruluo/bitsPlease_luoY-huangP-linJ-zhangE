@@ -120,5 +120,6 @@ peihuaH -- 2020-05-07 20:50
 peihuaH -- 2020-05-07 21:09
 - updated site map in design doc to reflect the route changes
 
-yaruL -- 2020-05-07 21:23
+yaruL -- 2020-05-07 21:55
 - inserted images on home page
+- updated descriptions on home page and info page
