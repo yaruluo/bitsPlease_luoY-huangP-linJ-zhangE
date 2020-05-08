@@ -124,5 +124,8 @@ yaruL -- 2020-05-07 21:55
 - inserted images on home page
 - updated descriptions on home page and info page
 
-yaruL -- 2020-05-08 1:03
+yaruL -- 2020-05-08 01:03
 - uploaded team flag!
+
+jackieL -- 2020-05-08 04:05
+- added hover effect to choropleth maps
