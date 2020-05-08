@@ -6,7 +6,7 @@ var svg, x, y, format;
 
 var render_pop = function(e){
   space.innerHTML = "";
-  var margin = {top: 30, right: 50, bottom: 10, left: 175},
+  var margin = {top: 30, right: 60, bottom: 10, left: 175},
       barHeight = 25,
       width = 800 + margin.right + margin.left;
       height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom;

@@ -3,7 +3,7 @@
 #P04 -- Let the Data Speak
 #2020-05-11
 
-from flask import Flask , render_template,request, redirect, url_for
+from flask import Flask , render_template,request, redirect, url_for, flash
 import os, random
 from utl import parser
 
@@ -28,10 +28,14 @@ def info():
 
 @app.route('/search')
 def search():
-    if (request.args):
-        if ('query' in request.args):
+    if request.args:
+        if 'query' in request.args:
+            states = parser.get_states()
             query = request.args['query']
-            return redirect(url_for('state', state=query))
+            for state in states:
+                if query.casefold() == state.casefold():
+                    return redirect(url_for('state', state=state))
+            flash("Please enter a valid US State.")
     return render_template('search.html', state='active')
 
 @app.route('/<state>')

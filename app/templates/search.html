@@ -6,6 +6,17 @@
 
 
 {% block body %}
+{% with errors = get_flashed_messages() %}
+	<ul style="list-style: none;">
+		{% for error in errors %}
+			<li>
+				<div class="alert alert-danger">
+					{{ error }}
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+{% endwith %}
 <h1>State</h1>
 <div class="d-flex justify-content-center">
     <form class="form-inline" action = "/search" method="GET">
