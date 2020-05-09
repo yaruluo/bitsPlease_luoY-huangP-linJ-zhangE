@@ -8,17 +8,23 @@
 <h2>{{name}}</h2>
 <span>
 	<div class="row justify-content-center">
-		<div class="col-sm-3">
-			<select id="order" class="custom-select" style="display:none">
+		<div class="col-lg-2">
+			<select id="type" class="custom-select">
+				<option value="0">Population</option>
+				<option value="1">Median Income</option>
+				<option value="2">Voting Status</option>
+			</select>
+		</div>
+		<div class="col-lg-2">
+			<select id="order" class="custom-select">
 				<option value="0">Alphabetical</option>
 				<option value="1">Ascending</option>
 				<option value="2">Descending</option>
 			</select>
 		</div>
-		<button class="btn btn-primary" id="change" style="display:none">Update</button>
+		<button class="btn btn-primary" id="render">Render</button>
 	</div>
 </span>
-<button class="btn btn-primary" id="pop">Population</button>
 <br>
 <div id="popchart">
 </div>

@@ -129,3 +129,9 @@ yaruL -- 2020-05-08 01:03
 
 jackieL -- 2020-05-08 04:05
 - added hover effect to choropleth maps
+
+peihuaH -- 2020-05-09 00:30
+- fixed the layout of the dropdowns in state.html to match the ones in home.html
+  (now charts will only display if both the type and display setting is selected and render is pressed)
+- cleaned up the code in state.js so that transitions work with the new layout
+- commented the parts of state.js where Emily can add the code for the last two charts

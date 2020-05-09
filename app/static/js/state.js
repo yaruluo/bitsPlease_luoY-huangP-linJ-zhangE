@@ -1,8 +1,9 @@
-var pop = document.getElementById('pop');
-var dropdown = document.getElementById('order');
-var change = document.getElementById('change');
+var order_dropdown = document.getElementById('order');
+var type_dropdown = document.getElementById('type');
+var render = document.getElementById('render');
 var space = document.getElementById('popchart');
-var svg, x, y, format;
+var pop_svg, pop_x, pop_y, pop_format;
+var prev_chart = -1;
 
 var render_pop = function(e){
   space.innerHTML = "";
@@ -10,61 +11,92 @@ var render_pop = function(e){
       barHeight = 25,
       width = 800 + margin.right + margin.left;
       height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom;
-  x = d3.scaleLinear()
+  pop_x = d3.scaleLinear()
       .domain([0, d3.max(data, function(d) { return +d.pop; })])
       .range([margin.left, width - margin.right]);
-  y = d3.scaleBand()
+  pop_y = d3.scaleBand()
       .domain(d3.range(data.length))
       .rangeRound([margin.top, height - margin.bottom])
       .padding(0.1);
-  format = x.tickFormat(20);
+  pop_format = pop_x.tickFormat(20);
   var xAxis = g => g
       .attr("transform", `translate(0,${margin.top})`)
-      .call(d3.axisTop(x).ticks(width / 80, data.format))
+      .call(d3.axisTop(pop_x).ticks(width / 80, data.format))
       .call(g => g.select(".domain").remove());
   var yAxis = g => g
       .attr("transform", `translate(${margin.left},0)`)
       .attr('class', 'yaxis')
-      .call(d3.axisLeft(y).tickFormat(i => data[i].county).tickSizeOuter(0))
-  svg = d3.select('#popchart')
+      .call(d3.axisLeft(pop_y).tickFormat(i => data[i].county).tickSizeOuter(0))
+  pop_svg = d3.select('#popchart')
     .append('svg')
       .attr('width', width)
       .attr('height', height);
-  svg.append("g")
+  pop_svg.append("g")
       .attr("fill", "#99aaff")
     .selectAll("rect")
     .data(data)
     .enter().append("rect")
-      .attr("x", x(0))
-      .attr("y", (d, i) => y(i))
-      .attr("width", d => x(d.pop) - x(0))
-      .attr("height", y.bandwidth());
+      .attr("x", pop_x(0))
+      .attr("y", (d, i) => pop_y(i))
+      .attr("width", d => pop_x(d.pop) - pop_x(0))
+      .attr("height", pop_y.bandwidth());
 
-  svg.append("g")
+  pop_svg.append("g")
       .attr("fill", "black")
       .attr("text-anchor", "start")
       .attr("font-size", 12)
     .selectAll("text")
     .data(data)
     .enter().append("text")
-      .attr("x", d => x(d.pop) + 4)
-      .attr("y", (d, i) => y(i) + y.bandwidth() / 2)
+      .attr("x", d => pop_x(d.pop) + 4)
+      .attr("y", (d, i) => pop_y(i) + pop_y.bandwidth() / 2)
       .attr("dy", "0.35em")
-      .text(d => format(d.pop));
+      .text(d => pop_format(d.pop));
 
-  svg.append("g")
+  pop_svg.append("g")
       .call(xAxis);
 
-  svg.append("g")
+  pop_svg.append("g")
       .call(yAxis);
-
-  dropdown.style.display = "block";
-  change.style.display = "block";
-  pop.style.display = "none";
 };
 
 var update_pop = function(e){
-  var order = dropdown.options[dropdown.selectedIndex].value;
+  pop_y.domain(d3.range(data.length));
+  pop_svg.select(".yaxis")
+    .transition()
+    .duration(3000)
+    .call(d3.axisLeft(pop_y).tickFormat(i => data[i].county).tickSizeOuter(0));
+  var u = pop_svg.selectAll("rect")
+    .data(data);
+
+  u
+    .enter().append("rect")
+    .merge(u)
+    .transition()
+    .duration(1000)
+      .attr("x", pop_x(0))
+      .attr("y", (d, i) => pop_y(i))
+      .attr("width", d => pop_x(d.pop) - pop_x(0))
+      .attr("height", pop_y.bandwidth())
+      .attr("fill", "#99aaff");
+
+  var v = pop_svg.selectAll("text")
+    .data(data);
+
+  v
+    .enter().append("text")
+    .merge(v)
+    .transition()
+    .duration(1000)
+      .attr("x", d => pop_x(d.pop) + 4)
+      .attr("y", (d, i) => pop_y(i) + pop_y.bandwidth() / 2)
+      .attr("dy", "0.35em")
+      .text(d => pop_format(d.pop));
+
+};
+
+render.addEventListener('click', function(){
+  var order = order_dropdown.options[order_dropdown.selectedIndex].value;
   if (order == 0) {
     data.sort(function (a,b) {return d3.ascending(a.county, b.county);});
   }
@@ -74,44 +106,24 @@ var update_pop = function(e){
   else{
     data.sort(function(a,b) { return -a.pop - -b.pop })
   };
-  y.domain(d3.range(data.length));
-  svg.select(".yaxis")
-    .transition()
-    .duration(3000)
-    .call(d3.axisLeft(y).tickFormat(i => data[i].county).tickSizeOuter(0));
-  var u = svg.selectAll("rect")
-    .data(data);
-
-  u
-    .enter().append("rect")
-    .merge(u)
-    .transition()
-    .duration(1000)
-      .attr("x", x(0))
-      .attr("y", (d, i) => y(i))
-      .attr("width", d => x(d.pop) - x(0))
-      .attr("height", y.bandwidth())
-      .attr("fill", "#99aaff");
-
-  var v = svg.selectAll("text")
-    .data(data);
-
-  v
-    .enter().append("text")
-    .merge(v)
-    .transition()
-    .duration(1000)
-      .attr("x", d => x(d.pop) + 4)
-      .attr("y", (d, i) => y(i) + y.bandwidth() / 2)
-      .attr("dy", "0.35em")
-      .text(d => format(d.pop));
-
-};
-
-pop.addEventListener('click', render_pop);
-change.addEventListener('click', function(){
-  if (space.innerHTML != ""){
-    update_pop();
+  var type = type_dropdown.options[type_dropdown.selectedIndex].value;
+  if (type == 0){
+    if (prev_chart == 0){
+      console.log("hi");
+      update_pop();
+    }
+    else {
+      render_pop();
+      console.log("bye");
+    };
+    prev_chart = 0;
+  }
+  else if (type == 1){
+    // render median income chart
+    prev_chart = 1;
+  }
+  else {
+    // render voting status chart
+    prev_chart = 2;
   };
-  pop.style.display = "none";
 });
