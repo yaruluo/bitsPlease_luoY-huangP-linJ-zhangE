@@ -56,6 +56,11 @@ jackieL -- 2020-05-01 03:17
 - linked home.html to flask route
 - mapped state population data in home.js
 
+emilyZ -- 2020-05-01 13:26
+- added in init file in util to make import possible
+- added in variable for file paths for better structure
+- adjusted file path so that the program is runnable using the instructions given in the README.md
+
 peihuaH -- 2020-05-01 20:39
 - fixed population by county chart such that:
   - the bars no longer go past the edge of the page
@@ -72,6 +77,9 @@ peihuaH -- 2020-05-02 00:48
 peihuaH -- 2020-05-02 01:06
 - fixed the labeling of the ethnicity chart such that the abbreviations of the states are displayed
 - added an abbrev column all the data gathered in parser.py to make life easier for everyone
+
+emilyZ -- 2020-05-03 02:47
+- added the median income barchart - has problems rendering
 
 jackieL -- 2020-05-04 03:18
 - fixed color scale of map and got population of states to render on choropleth map
@@ -104,6 +112,9 @@ jackieL -- 2020-05-05 00:29
 - added dropdown menus to homepage and reorganized buttons
 - finished bubble chart for state population
 
+emilyZ -- 2020-05-05 01:02
+- the median income chart renders now, but is upside-down
+
 jackieL -- 2020-05-05 02:54
 - added choropleth map representing gender ratios in each state
 - added choropleth map representing ethnicity numbers in each state, with buttons to switch between ethnicities
@@ -124,6 +135,10 @@ yaruL -- 2020-05-07 21:55
 - inserted images on home page
 - updated descriptions on home page and info page
 
+emilyZ -- 2020-05-07 00:35
+- translate axis to stop going off the screen
+- axis labels overlap
+
 yaruL -- 2020-05-08 01:03
 - uploaded team flag!
 
@@ -135,3 +150,7 @@ peihuaH -- 2020-05-09 00:30
   (now charts will only display if both the type and display setting is selected and render is pressed)
 - cleaned up the code in state.js so that transitions work with the new layout
 - commented the parts of state.js where Emily can add the code for the last two charts
+
+emilyZ -- 2020-05-10 2:00
+- move code to locations in state.js designated for median income
+- added code for pie chart (can't display just yet)

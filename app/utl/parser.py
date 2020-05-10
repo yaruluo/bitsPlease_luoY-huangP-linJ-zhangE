@@ -1,5 +1,7 @@
 import csv
 
+DATA = 'app/data/2017data.csv'
+
 ABBREV = {'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR', 'California': 'CA',
           'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE', 'Florida': 'FL', 'Georgia': 'GA',
           'Hawaii': 'HI', 'Idaho': 'ID', 'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA',
@@ -17,7 +19,7 @@ def get_data_by_state():
     '''returns all the data needed for the population, ethnicity, gender ratio,
        and voting citizen by state charts'''
     data = []
-    with open('data/2017data.csv') as csv_file:
+    with open(DATA) as csv_file:
         state = ""
         pop = men = women = voting = 0
         reader = csv.DictReader(csv_file)
@@ -40,7 +42,7 @@ def get_data_by_state():
 def get_ethnicity_by_state():
     '''returns all the data needed for the ethnicity by state charts'''
     data = []
-    with open('data/2017data.csv') as csv_file:
+    with open(DATA) as csv_file:
         state = ""
         hispanic = white = black = native = asian = pacific = total = 0
         reader = csv.DictReader(csv_file)
@@ -67,7 +69,7 @@ def get_ethnicity_by_state():
 def get_gender_by_state():
     '''returns all the data needed for the gender ratio by state charts'''
     data = []
-    with open('data/2017data.csv') as csv_file:
+    with open(DATA) as csv_file:
         state = ""
         male = female = total = 0
         reader = csv.DictReader(csv_file)
@@ -86,12 +88,27 @@ def get_gender_by_state():
                 total = female = male = 0
     return data
 
+def get_voting_by_state(state):
+    data = []
+    with open(DATA) as csv_file:
+        population = 0
+        voting = 0
+        reader = csv.DictReader(csv_file)
+        for row in reader:
+            if (row['State'] == state):
+                voting = int(row['VotingAgeCitizen'])
+                population = int(row['TotalPop'])
+        data.append({'voting': voting})
+        data.append({'nonvoting': population - voting})
+    return data
+
+
 
 def get_data_by_county(state):
     '''returns all the data needed for the population and median income by county
        charts for the given state'''
     data = []
-    with open('data/2017data.csv') as csv_file:
+    with open(DATA) as csv_file:
         reader = csv.DictReader(csv_file)
         for row in reader:
             if state == row['State']:

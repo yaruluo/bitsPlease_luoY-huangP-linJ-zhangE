@@ -40,7 +40,8 @@ def search():
 @app.route('/<state>')
 def state(state):
     data = parser.get_data_by_county(state)
-    return render_template('state.html', data = data, state='active', name=state)
+    vote_data = parser.get_voting_by_state(state)
+    return render_template('state.html', data = data, state='active', name=state, vote_data = vote_data)
 
 if __name__ == "__main__":
     app.debug = True
