@@ -98,8 +98,8 @@ def get_voting_by_state(state):
             if (row['State'] == state):
                 voting = int(row['VotingAgeCitizen'])
                 population = int(row['TotalPop'])
-        data.append({'voting': voting})
-        data.append({'nonvoting': population - voting})
+        data.append({'name': 'Voting', 'value': voting})
+        data.append({'name': 'Nonvoting', 'value': population - voting})
     return data
 
 

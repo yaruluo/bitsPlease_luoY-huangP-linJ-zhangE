@@ -1,6 +1,7 @@
 var order_dropdown = document.getElementById('order');
 var type_dropdown = document.getElementById('type');
 var render = document.getElementById('render');
+var update = document.getElementById('update');
 var space = document.getElementById('popchart');
 var pop_svg, pop_x, pop_y, pop_format;
 var income_svg, income_x, income_y, income_format;
@@ -187,47 +188,88 @@ var update_income = function(e){
 
 };
 
-// var render_voting = function(e) {
-//
-//     var margin = { top: 30, right: 60, bottom: 10, left: 175 },
-//       width = 500 + margin.right + margin.left
-//       height = 500 + margin.right + margin.left;
-//
-//     voting_svg = d3.select('#popchart')
-//       .append('svg')
-//       .attr('width', width)
-//       .attr('height', height)
-//
-//     const color = d3.scaleOrdinal()
-//       .domain(vote_data)
-//       .range(['#F1892D', '#0EAC51', '#0077C0', '#7E349D', '#DA3C78', '#E74C3C'])
-//
-//     const g = voting_svg.append('g')
-//       .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-//
-//     const pie = d3.pie()
-//       .value((d) => d.value)
-//
-//     const arc = d3.arc()
-//       .innerRadius(0)
-//       .outerRadius(250)
-//
-//     const part = g.selectAll('.part')
-//       .data(pie(d3.entries(vote_data)))
-//       .enter()
-//       .append('g')
-//
-//     part.append('path')
-//       .attr('d', arc)
-//       .attr('fill', (d, i) => color(i))
-//
-//     part.append("text")
-//       .attr('transform', (d) => 'translate(' + arc.centroid(d) + ')')
-//       .text((d) => d.data.key)
-//       .attr('fill', 'white')
-// };
+var render_voting = function(e) {
+  space.innerHTML = "";
+  console.log(vote_data);
+  var height = 500,
+      width = 500;
+
+  var arc = d3.arc()
+    .innerRadius(0)
+    .outerRadius(Math.min(width, height) / 2 - 1);
+
+  const radius = Math.min(width, height) / 2 * 0.8;
+
+  var arcLabel = d3.arc().innerRadius(radius).outerRadius(radius);
+
+  var pie = d3.pie()
+    .sort(null)
+    .value(d => d.value);
+
+  var color = d3.scaleOrdinal()
+    .domain(vote_data.map(d => d.name))
+    .range(['#799fcb', '#f9665e']);
+
+  const arcs = pie(vote_data);
+
+  const svg = d3.select('#popchart')
+    .append('svg')
+      .attr('width', width)
+      .attr('height', height)
+      .attr("viewBox", [-width / 2, -height / 2, width, height]);
+
+  svg.append("g")
+      .attr("stroke", "white")
+    .selectAll("path")
+    .data(arcs)
+    .join("path")
+      .attr("fill", d => color(d.data.name))
+      .attr("d", arc)
+    .append("title")
+      .text(d => `${d.data.name}: ${d.data.value.toLocaleString()}`);
+
+  svg.append("g")
+      .attr("font-family", "sans-serif")
+      .attr("font-size", 12)
+      .attr("text-anchor", "middle")
+    .selectAll("text")
+    .data(arcs)
+    .join("text")
+      .attr("transform", d => `translate(${arcLabel.centroid(d)})`)
+      .call(text => text.append("tspan")
+          .attr("y", "-0.4em")
+          .attr("font-weight", "bold")
+          .text(d => d.data.name))
+      .call(text => text.filter(d => (d.endAngle - d.startAngle) > 0.25).append("tspan")
+          .attr("x", 0)
+          .attr("y", "0.7em")
+          .attr("fill-opacity", 0.7)
+          .text(d => d.data.value.toLocaleString()));
+};
 
 render.addEventListener('click', function(){
+  var type = type_dropdown.options[type_dropdown.selectedIndex].value;
+  console.log(type);
+  if (type == 0 || type == 1){
+    update.style.display = "block";
+    order_dropdown.style.display = "block";
+    data.sort(function (a,b) {return d3.ascending(a.county, b.county);});
+    order_dropdown.value = 0;
+    if (type == 0){
+      render_pop();
+    }
+    else {
+      render_income();
+    };
+  }
+  else{
+    update.style.display = "none";
+    order_dropdown.style.display = "none";
+    render_voting();
+  };
+});
+
+update.addEventListener('click', function(){
   var order = order_dropdown.options[order_dropdown.selectedIndex].value;
   var type = type_dropdown.options[type_dropdown.selectedIndex].value;
   if (order == 0) {
@@ -246,27 +288,12 @@ render.addEventListener('click', function(){
     data.sort(function(a,b) { return -a.income - -b.income })
   };
   if (type == 0){
-    if (prev_chart == 0){
-      update_pop();
-    }
-    else {
-      render_pop();
-    };
+    update_pop();
     prev_chart = 0;
   }
   else if (type == 1){
     // render median income chart
-    if (prev_chart == 1){
-      update_income();
-    }
-    else {
-      render_income();
-    };
+    update_income();
     prev_chart = 1;
-  }
-  else {
-    // render voting status chart
-    prev_chart = 2;
-    render_voting();
   };
 });
