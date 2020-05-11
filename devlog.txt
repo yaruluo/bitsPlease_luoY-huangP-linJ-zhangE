@@ -155,5 +155,15 @@ emilyZ -- 2020-05-10 14:00
 - move code to locations in state.js designated for median income
 - added code for pie chart (can't display just yet)
 
+peihuaH -- 2020-05-10 20:32
+- converted the median income chart to a horizontal bar chart (so all the county names can display properly)
+- fixed the path for the csv file
+- split the render button to render and update (update button and view setting dropdown will not appear for pie chart)
+
 yaruL -- 2020-05-10 20:36
 - updated design doc
+
+peihuaH -- 2020-05-10 22:06
+- fixed the voting status pie chart so that it displays:
+  - fixed the formatting of the data in parse.py
+  - fixed issue where the viewbox wasn't set and the graph goes out of the svg
