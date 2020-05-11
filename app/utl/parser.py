@@ -1,6 +1,6 @@
 import csv
 
-DATA = 'app/data/2017data.csv'
+DATA = 'data/2017data.csv'
 
 ABBREV = {'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR', 'California': 'CA',
           'Colorado': 'CO', 'Connecticut': 'CT', 'Delaware': 'DE', 'Florida': 'FL', 'Georgia': 'GA',

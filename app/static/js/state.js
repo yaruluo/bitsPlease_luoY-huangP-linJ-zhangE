@@ -97,138 +97,172 @@ var update_pop = function(e){
 
 };
 
-var render_income = function(e) {
-  console.log(data);
+var render_income = function(e){
   space.innerHTML = "";
-  var margin = { top: 30, right: 60, bottom: 10, left: 175 },
-    barHeight = 25,
-    width = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom;
-    height = 800 + margin.right + margin.left;
-  
-  income_x = d3.scaleBand()
-    .domain(d3.range(data.length))
-    .rangeRound([margin.left, width - margin.right])
-    .padding(0.1);
-
-  income_y = d3.scaleLinear()
-    .domain([0, d3.max(data, function (d) { return +d.income; })])
-    .range([margin.top, height - margin.bottom]);
-
-  income_format = income_y.tickFormat(2000);
-
+  var margin = {top: 30, right: 60, bottom: 10, left: 175},
+      barHeight = 25,
+      width = 800 + margin.right + margin.left;
+      height = Math.ceil((data.length + 0.1) * barHeight) + margin.top + margin.bottom;
+  income_x = d3.scaleLinear()
+      .domain([0, d3.max(data, function(d) { return +d.income; })])
+      .range([margin.left, width - margin.right]);
+  income_y = d3.scaleBand()
+      .domain(d3.range(data.length))
+      .rangeRound([margin.top, height - margin.bottom])
+      .padding(0.1);
+  income_format = income_x.tickFormat(20);
   var xAxis = g => g
-    .attr("transform", `translate(0, ${margin.top})`)
-    .attr('class', 'xaxis')
-    .call(d3.axisTop(income_x).tickFormat(i => data[i].county).tickSizeOuter(0));
-
+      .attr("transform", `translate(0,${margin.top})`)
+      .call(d3.axisTop(income_x).ticks(width / 80, data.format))
+      .call(g => g.select(".domain").remove());
   var yAxis = g => g
-    .attr("transform", `translate(${margin.left}, 0)`)
-    .call(d3.axisLeft(income_y).ticks(width / 80, data.format))
-    .call(g => g.select(".domain").remove());
-
+      .attr("transform", `translate(${margin.left},0)`)
+      .attr('class', 'yaxis')
+      .call(d3.axisLeft(income_y).tickFormat(i => data[i].county).tickSizeOuter(0))
   income_svg = d3.select('#popchart')
     .append('svg')
-    .attr('width', width)
-    .attr('height', height);
-  
+      .attr('width', width)
+      .attr('height', height);
   income_svg.append("g")
-    .attr("fill", "#99aaff")
+      .attr("fill", "#99aaff")
     .selectAll("rect")
     .data(data)
     .enter().append("rect")
-    .attr("x", (d, i) => income_x(i))
-    .attr("y", income_y(0))
-    .attr("width", income_x.bandwidth()) 
-    .attr("height", d => income_y(d.income) - income_y(0));
-    
+      .attr("x", income_x(0))
+      .attr("y", (d, i) => income_y(i))
+      .attr("width", d => income_x(d.income) - income_x(0))
+      .attr("height", income_y.bandwidth());
+
   income_svg.append("g")
-    .attr("fill", "black")
-    .attr("text-anchor", "start")
-    .attr("font-size", 12)
+      .attr("fill", "black")
+      .attr("text-anchor", "start")
+      .attr("font-size", 12)
     .selectAll("text")
     .data(data)
     .enter().append("text")
-    .attr("x", (d, i) => income_x(i) + income_x.bandwidth() / 2)
-    .attr("y", d => income_y(d.income) + 4)
-    .attr("dx", "0.35em")
-    .text(d => income_format(d.income));
+      .attr("x", d => income_x(d.income) + 4)
+      .attr("y", (d, i) => income_y(i) + income_y.bandwidth() / 2)
+      .attr("dy", "0.35em")
+      .text(d => "$" + income_format(d.income));
 
   income_svg.append("g")
-    .call(xAxis);
+      .call(xAxis);
 
   income_svg.append("g")
-    .call(yAxis);
+      .call(yAxis);
 };
 
+var update_income = function(e){
+  income_y.domain(d3.range(data.length));
+  income_svg.select(".yaxis")
+    .transition()
+    .duration(3000)
+    .call(d3.axisLeft(income_y).tickFormat(i => data[i].county).tickSizeOuter(0));
+  var u = income_svg.selectAll("rect")
+    .data(data);
 
+  u
+    .enter().append("rect")
+    .merge(u)
+    .transition()
+    .duration(1000)
+      .attr("x", income_x(0))
+      .attr("y", (d, i) => income_y(i))
+      .attr("width", d => income_x(d.income) - income_x(0))
+      .attr("height", income_y.bandwidth())
+      .attr("fill", "#99aaff");
 
-var render_voting = function(e) {
+  var v = income_svg.selectAll("text")
+    .data(data);
 
-    var margin = { top: 30, right: 60, bottom: 10, left: 175 },
-      width = 500 + margin.right + margin.left
-      height = 500 + margin.right + margin.left;
+  v
+    .enter().append("text")
+    .merge(v)
+    .transition()
+    .duration(1000)
+      .attr("x", d => income_x(d.income) + 4)
+      .attr("y", (d, i) => income_y(i) + income_y.bandwidth() / 2)
+      .attr("dy", "0.35em")
+      .text(d => "$" + income_format(d.income));
 
-    voting_svg = d3.select('#popchart')
-      .append('svg')
-      .attr('width', width)
-      .attr('height', height)
-
-    const color = d3.scaleOrdinal()
-      .domain(vote_data)
-      .range(['#F1892D', '#0EAC51', '#0077C0', '#7E349D', '#DA3C78', '#E74C3C'])
-
-    const g = voting_svg.append('g')
-      .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
-
-    const pie = d3.pie()
-      .value((d) => d.value)
-
-    const arc = d3.arc()
-      .innerRadius(0)
-      .outerRadius(250)
-
-    const part = g.selectAll('.part')
-      .data(pie(d3.entries(vote_data)))
-      .enter()
-      .append('g')
-
-    part.append('path')
-      .attr('d', arc)
-      .attr('fill', (d, i) => color(i))
-
-    part.append("text")
-      .attr('transform', (d) => 'translate(' + arc.centroid(d) + ')')
-      .text((d) => d.data.key)
-      .attr('fill', 'white')
 };
+
+// var render_voting = function(e) {
+//
+//     var margin = { top: 30, right: 60, bottom: 10, left: 175 },
+//       width = 500 + margin.right + margin.left
+//       height = 500 + margin.right + margin.left;
+//
+//     voting_svg = d3.select('#popchart')
+//       .append('svg')
+//       .attr('width', width)
+//       .attr('height', height)
+//
+//     const color = d3.scaleOrdinal()
+//       .domain(vote_data)
+//       .range(['#F1892D', '#0EAC51', '#0077C0', '#7E349D', '#DA3C78', '#E74C3C'])
+//
+//     const g = voting_svg.append('g')
+//       .attr('transform', 'translate(' + width / 2 + ',' + height / 2 + ')')
+//
+//     const pie = d3.pie()
+//       .value((d) => d.value)
+//
+//     const arc = d3.arc()
+//       .innerRadius(0)
+//       .outerRadius(250)
+//
+//     const part = g.selectAll('.part')
+//       .data(pie(d3.entries(vote_data)))
+//       .enter()
+//       .append('g')
+//
+//     part.append('path')
+//       .attr('d', arc)
+//       .attr('fill', (d, i) => color(i))
+//
+//     part.append("text")
+//       .attr('transform', (d) => 'translate(' + arc.centroid(d) + ')')
+//       .text((d) => d.data.key)
+//       .attr('fill', 'white')
+// };
 
 render.addEventListener('click', function(){
   var order = order_dropdown.options[order_dropdown.selectedIndex].value;
+  var type = type_dropdown.options[type_dropdown.selectedIndex].value;
   if (order == 0) {
     data.sort(function (a,b) {return d3.ascending(a.county, b.county);});
   }
-  else if (order == 1){
+  else if (order == 1 && type == 0){
     data.sort(function(a,b) { return +a.pop - +b.pop })
   }
-  else{
+  else if (order == 1 && type == 1){
+    data.sort(function(a,b) { return +a.income - +b.income })
+  }
+  else if (type == 0){
     data.sort(function(a,b) { return -a.pop - -b.pop })
+  }
+  else {
+    data.sort(function(a,b) { return -a.income - -b.income })
   };
-  var type = type_dropdown.options[type_dropdown.selectedIndex].value;
   if (type == 0){
     if (prev_chart == 0){
-      console.log("hi");
       update_pop();
     }
     else {
       render_pop();
-      console.log("bye");
     };
     prev_chart = 0;
   }
   else if (type == 1){
     // render median income chart
+    if (prev_chart == 1){
+      update_income();
+    }
+    else {
+      render_income();
+    };
     prev_chart = 1;
-    render_income();
   }
   else {
     // render voting status chart
