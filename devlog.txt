@@ -151,6 +151,9 @@ peihuaH -- 2020-05-09 00:30
 - cleaned up the code in state.js so that transitions work with the new layout
 - commented the parts of state.js where Emily can add the code for the last two charts
 
-emilyZ -- 2020-05-10 2:00
+emilyZ -- 2020-05-10 14:00
 - move code to locations in state.js designated for median income
 - added code for pie chart (can't display just yet)
+
+yaruL -- 2020-05-10 20:36
+- updated design doc
