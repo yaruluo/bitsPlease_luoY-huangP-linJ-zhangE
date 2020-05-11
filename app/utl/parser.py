@@ -96,8 +96,8 @@ def get_voting_by_state(state):
         reader = csv.DictReader(csv_file)
         for row in reader:
             if (row['State'] == state):
-                voting = int(row['VotingAgeCitizen'])
-                population = int(row['TotalPop'])
+                voting += int(row['VotingAgeCitizen'])
+                population += int(row['TotalPop'])
         data.append({'name': 'Voting', 'value': voting})
         data.append({'name': 'Nonvoting', 'value': population - voting})
     return data

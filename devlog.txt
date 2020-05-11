@@ -167,3 +167,6 @@ peihuaH -- 2020-05-10 22:06
 - fixed the voting status pie chart so that it displays:
   - fixed the formatting of the data in parse.py
   - fixed issue where the viewbox wasn't set and the graph goes out of the svg
+
+peihuaH -- 2020-05-10 22:19
+- fixed pie chart where the population seems extremely low (parse.py was only returning the values of one county)
