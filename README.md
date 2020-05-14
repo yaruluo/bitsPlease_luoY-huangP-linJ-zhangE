@@ -8,8 +8,8 @@ P04: Let the Data Speak
 
 2020-05-11
 
-### [video demo here](https://www.youtube.com/watch?v=XNLCD_GOm8E)
-
+### [Video Demo Here](https://www.youtube.com/watch?v=XNLCD_GOm8E)
+Our site is also live [here](p4.jckiesd.tech). 
 
 # Roster
 Yaru (PM)
@@ -91,7 +91,10 @@ git clone https://github.com/yaruluo/raduckal__yluo00-phuang00-jlin00-ezhang00
 Run the following line in your virtual environment
 
 ```shell
-python3 app/__init.py__
+cd app/
+python3 __init__.py
 ```
 
 Open a browser and head to <http://127.0.0.1:5000/>
+
+
