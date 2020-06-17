@@ -8,7 +8,7 @@ P04: Let the Data Speak
 
 2020-05-11
 
-### [Video Demo Here](https://www.youtube.com/watch?v=XNLCD_GOm8E)
+### [Video Demo Here]()
 Our site is also live [here](http://p4.jckiesd.tech). 
 
 # Roster
