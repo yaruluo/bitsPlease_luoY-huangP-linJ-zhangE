@@ -17,7 +17,7 @@ Yaru (PM)
 - updates design doc and devlog
 - instructions page
 
-Jenny
+Peihua
 - Data transfer via Jinja
 - Population by county in a horizontal bar chart
 - Ethnicity by state in a radially-stacked bar chart
